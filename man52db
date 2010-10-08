@@ -1,0 +1,71 @@
+--
+-- PostgreSQL database dump
+--
+
+SET client_encoding = 'UTF8';
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON SCHEMA public IS 'Standard public schema';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: members; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE members (
+    m_login character varying,
+    m_password character varying,
+    m_fname character varying,
+    m_lname character varying,
+    m_office character varying,
+    m_telno character varying,
+    m_email character varying
+);
+
+
+ALTER TABLE public.members OWNER TO postgres;
+
+--
+-- Data for Name: members; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY members (m_login, m_password, m_fname, m_lname, m_office, m_telno, m_email) FROM stdin;
+00001	00001	Titasak	Boonthai	Home	029828261	titasak@hotmail.com
+\.
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- Name: members; Type: ACL; Schema: public; Owner: postgres
+--
+
+REVOKE ALL ON TABLE members FROM PUBLIC;
+REVOKE ALL ON TABLE members FROM postgres;
+GRANT ALL ON TABLE members TO postgres;
+GRANT ALL ON TABLE members TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

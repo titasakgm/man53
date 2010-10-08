@@ -1,0 +1,46 @@
+img {
+  vertical-align: middle;
+}
+.app-msg {
+  font-size: 15px;
+  font-weight: bold;
+}
+.lock-btn .x-btn-text {
+  background-image: url(/man52/icons/lock_open.png);
+}
+.x-btn-pressed.lock-btn .x-btn-text {
+  background-image: url(/man52/icons/lock.png);
+}
+.table-delete {
+  background-image: url(/man52/icons/table_delete.png);
+}
+.table-add {
+  background-image: url(/man52/icons/table_add.png);
+}
+
+/* Change background color of grid */
+.gridlock {
+  background-color: #C9C9C9 !important;
+}
+tr.x-grid-row.x-grid-row-alt.gridlock {
+  background-color: #C9C9C9 !important;
+}
+
+/* Hide red dirty mark */
+.no-dirty-mark .x-grid3-dirty-cell {
+  background-image: none;
+}
+
+/* Set font color for disabled field */ 
+.x-item-disabled {
+  color: #F00;
+}
+.x-item-disabled * {
+  color: #F00 !important;
+}
+
+/* Paging Toolbar */
+.x-tbar-page-number{
+        width:40px;
+        height:14px;
+}

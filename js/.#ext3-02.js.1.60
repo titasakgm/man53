@@ -1,0 +1,766 @@
+Ext.QuickTips.init();
+
+var cur_man = 3;
+var cur_office = office;
+var cur_pid = cur_ptype = '';
+
+var m03_store = new Ext.data.Store({
+  url: 'rb/get-m03-store.rb'
+  ,reader: new Ext.data.JsonReader({
+    root: 'rows'
+    ,totalProperty: 'totalCount'
+    ,id: 'id'
+    ,fields: [
+      'id'
+      ,'bhpp_code'
+      ,'person_code'
+      ,'office'
+      ,'pid'
+      ,'fname'
+      ,'lname'
+      ,'sex'
+    ]
+  }) 
+});
+
+m03_store.load();
+
+var addImage = function(){
+  return '<img alt="รายละเอียด" src="icons/table_edit.png"/>';
+};
+
+function showInputForm() {
+  var win = new Ext.Window({
+    id: 'inputform-win'
+    ,width: 400
+    ,minWidth: 300
+    ,height: 250
+    ,minHeight: 150
+    ,layout: 'fit'
+    ,title: 'รายละเอียดข้อมูลบุคลากร  '+ ': ' + Ext.getCmp('id_man_' + cur_man).title
+    ,closable: true
+    ,items:[{
+      xtype: 'tabpanel'
+      ,activeItem: 0
+	  ,border: false
+      ,anchor: '100% 100%'
+	  ,deferredRender: false
+      ,items: []
+    }]
+    ,buttonAlign: 'center'
+    ,buttons:[{
+      text: 'Save'
+      ,handler: function() {
+        Ext.getCmp('inputform-form').getForm().submit({params:{cmd:'submit'}});
+      }
+    },{
+      text: 'Cancel'
+    }] //eo buttons
+  }); //eo new Ext.Window
+  //show window
+  win.show();
+};
+
+var m03_grid = new Ext.grid.GridPanel({
+  frame: false
+  ,id: 'm03_grid'
+  ,store: m03_store
+  ,columns: [new Ext.grid.RowNumberer({width: 30}),{
+    id: 'bhpp_code'    
+    ,header: '<b>รหัส สนย.</b>'
+    ,dataIndex: 'bhpp_code'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'person_code'
+    ,header: '<b>รหัส กอง จ.</b>'
+    ,dataIndex: 'person_code'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'office'
+    ,header: '<b>ชื่อหน่วยงาน</b>'
+    ,dataIndex: 'office'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'pid'
+    ,header: '<b>เลขที่บัตรประชาชน</b>'
+    ,dataIndex: 'pid'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'fname'
+    ,header: '<b>ชื่อ</b>'
+    ,dataIndex: 'fname'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'lname'
+    ,header: '<b>นามสกุล</b>'
+    ,dataIndex: 'lname'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'sex'
+    ,header: '<b>เพศ</b>'
+    ,dataIndex: 'sex'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'detail'
+    ,header: ''
+    ,width: 30
+    ,dataIndex: ''
+    ,renderer: addImage
+  }]
+  ,viewConfig: {
+    forceFit: true,
+  }
+  ,tbar: [{
+    xtype: 'tbbutton'
+    ,cls: 'x-btn-text-icon'
+    ,icon: 'icons/add.png'
+    ,text: 'Add'
+  },'-',{
+    xtype: 'tbbutton'
+    ,cls: 'x-btn-text-icon'
+    ,icon: 'icons/delete.png'
+    ,text: 'Delete'
+  },'->',{
+    xtype: 'tbbutton'
+    ,id: 'id_next'
+    ,text: ''
+    ,tooltip: 'บันทึกข้อมูลบุคลากรประเภทต่อไป!'
+    ,cls: 'x-btn-icon'
+    ,icon: 'icons/resultset_next.png'
+    ,handler: function(b,e) {
+      if (cur_man == 8)
+      {
+        Ext.getCmp('id_man_' + cur_man).disable();
+        cur_man = 3;
+        Ext.getCmp('id_man_3').enable();  
+        Ext.getCmp('id_man_3').show();  
+      }
+      else
+      {
+        Ext.getCmp('id_man_' + cur_man).disable();
+        cur_man = cur_man+1;
+        Ext.getCmp('id_man_' + cur_man).enable();  
+        Ext.getCmp('id_man_' + cur_man).show();  
+      }
+    }
+  }]
+  ,listeners: {
+    cellclick: function(grid, rowIndex, columnIndex, e){
+      var data = grid.getStore().data.items[rowIndex].data;
+      var pid = data.pid;
+
+      cur_pid = pid;
+
+      if (columnIndex == 8)
+      {
+        showInputForm();
+      }
+    } //eo cellclick
+  } //eo listeners
+  ,bbar: new Ext.PagingToolbar({
+    pageSize: 10
+    ,store: m03_store
+    ,displayInfo: false
+    ,emptyMsg: 'No record to display'
+  })
+});
+
+var m04_grid = new Ext.grid.GridPanel({
+  frame: false
+  ,store: m03_store
+  ,columns: [new Ext.grid.RowNumberer({width: 30}),{
+    id: 'bhpp_code'    
+    ,header: '<b>รหัส สนย.</b>'
+    ,dataIndex: 'bhpp_code'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'person_code'
+    ,header: '<b>รหัส กอง จ.</b>'
+    ,dataIndex: 'person_code'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'office'
+    ,header: '<b>ชื่อหน่วยงาน</b>'
+    ,dataIndex: 'office'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'pid'
+    ,header: '<b>เลขที่บัตรประชาชน</b>'
+    ,dataIndex: 'pid'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'fname'
+    ,header: '<b>ชื่อ</b>'
+    ,dataIndex: 'fname'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'lname'
+    ,header: '<b>นามสกุล</b>'
+    ,dataIndex: 'lname'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'sex'
+    ,header: '<b>เพศ</b>'
+    ,dataIndex: 'sex'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'detail'
+    ,header: ''
+    ,width: 30
+    ,dataIndex: ''
+    ,renderer: addImage
+  }]
+  ,viewConfig: {
+    forceFit: true,
+  }
+  ,tbar: [{
+    xtype: 'tbbutton'
+    ,cls: 'x-btn-text-icon'
+    ,icon: 'icons/add.png'
+    ,text: 'Add'
+  },'-',{
+    xtype: 'tbbutton'
+    ,cls: 'x-btn-text-icon'
+    ,icon: 'icons/delete.png'
+    ,text: 'Delete'
+  },'->',{
+    xtype: 'tbbutton'
+    ,id: 'id_next'
+    ,text: ''
+    ,tooltip: 'บันทึกข้อมูลบุคลากรประเภทต่อไป!'
+    ,cls: 'x-btn-icon'
+    ,icon: 'icons/resultset_next.png'
+    ,handler: function(b,e) {
+      if (cur_man == 8)
+      {
+        Ext.getCmp('id_man_' + cur_man).disable();
+        cur_man = 3;
+        Ext.getCmp('id_man_3').enable();  
+        Ext.getCmp('id_man_3').show();  
+      }
+      else
+      {
+        Ext.getCmp('id_man_' + cur_man).disable();
+        cur_man = cur_man+1;
+        Ext.getCmp('id_man_' + cur_man).enable();  
+        Ext.getCmp('id_man_' + cur_man).show();  
+      }
+    }
+  }]
+  ,bbar: new Ext.PagingToolbar({
+    pageSize: 10
+    ,store: m03_store
+    ,displayInfo: false
+    ,emptyMsg: 'No record to display'
+  })
+});
+
+var m05_grid = new Ext.grid.GridPanel({
+  frame: false
+  ,store: m03_store
+  ,columns: [new Ext.grid.RowNumberer({width: 30}),{
+    id: 'bhpp_code'    
+    ,header: '<b>รหัส สนย.</b>'
+    ,dataIndex: 'bhpp_code'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'person_code'
+    ,header: '<b>รหัส กอง จ.</b>'
+    ,dataIndex: 'person_code'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'office'
+    ,header: '<b>ชื่อหน่วยงาน</b>'
+    ,dataIndex: 'office'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'pid'
+    ,header: '<b>เลขที่บัตรประชาชน</b>'
+    ,dataIndex: 'pid'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'fname'
+    ,header: '<b>ชื่อ</b>'
+    ,dataIndex: 'fname'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'lname'
+    ,header: '<b>นามสกุล</b>'
+    ,dataIndex: 'lname'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'sex'
+    ,header: '<b>เพศ</b>'
+    ,dataIndex: 'sex'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'detail'
+    ,header: ''
+    ,width: 30
+    ,dataIndex: ''
+    ,renderer: addImage
+  }]
+  ,viewConfig: {
+    forceFit: true,
+  }
+  ,tbar: [{
+    xtype: 'tbbutton'
+    ,cls: 'x-btn-text-icon'
+    ,icon: 'icons/add.png'
+    ,text: 'Add'
+  },'-',{
+    xtype: 'tbbutton'
+    ,cls: 'x-btn-text-icon'
+    ,icon: 'icons/delete.png'
+    ,text: 'Delete'
+  },'->',{
+    xtype: 'tbbutton'
+    ,id: 'id_next'
+    ,text: ''
+    ,tooltip: 'บันทึกข้อมูลบุคลากรประเภทต่อไป!'
+    ,cls: 'x-btn-icon'
+    ,icon: 'icons/resultset_next.png'
+    ,handler: function(b,e) {
+      if (cur_man == 8)
+      {
+        Ext.getCmp('id_man_' + cur_man).disable();
+        cur_man = 3;
+        Ext.getCmp('id_man_3').enable();  
+        Ext.getCmp('id_man_3').show();  
+      }
+      else
+      {
+        Ext.getCmp('id_man_' + cur_man).disable();
+        cur_man = cur_man+1;
+        Ext.getCmp('id_man_' + cur_man).enable();  
+        Ext.getCmp('id_man_' + cur_man).show();  
+      }
+    }
+  }]
+  ,bbar: new Ext.PagingToolbar({
+    pageSize: 10
+    ,store: m03_store
+    ,displayInfo: false
+    ,emptyMsg: 'No record to display'
+  })
+});
+
+var m06_grid = new Ext.grid.GridPanel({
+  frame: false
+  ,store: m03_store
+  ,columns: [new Ext.grid.RowNumberer({width: 30}),{
+    id: 'bhpp_code'    
+    ,header: '<b>รหัส สนย.</b>'
+    ,dataIndex: 'bhpp_code'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'person_code'
+    ,header: '<b>รหัส กอง จ.</b>'
+    ,dataIndex: 'person_code'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'office'
+    ,header: '<b>ชื่อหน่วยงาน</b>'
+    ,dataIndex: 'office'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'pid'
+    ,header: '<b>เลขที่บัตรประชาชน</b>'
+    ,dataIndex: 'pid'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'fname'
+    ,header: '<b>ชื่อ</b>'
+    ,dataIndex: 'fname'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'lname'
+    ,header: '<b>นามสกุล</b>'
+    ,dataIndex: 'lname'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'sex'
+    ,header: '<b>เพศ</b>'
+    ,dataIndex: 'sex'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'detail'
+    ,header: ''
+    ,width: 30
+    ,dataIndex: ''
+    ,renderer: addImage
+  }]
+  ,viewConfig: {
+    forceFit: true,
+  }
+  ,tbar: [{
+    xtype: 'tbbutton'
+    ,cls: 'x-btn-text-icon'
+    ,icon: 'icons/add.png'
+    ,text: 'Add'
+  },'-',{
+    xtype: 'tbbutton'
+    ,cls: 'x-btn-text-icon'
+    ,icon: 'icons/delete.png'
+    ,text: 'Delete'
+  },'->',{
+    xtype: 'tbbutton'
+    ,id: 'id_next'
+    ,text: ''
+    ,tooltip: 'บันทึกข้อมูลบุคลากรประเภทต่อไป!'
+    ,cls: 'x-btn-icon'
+    ,icon: 'icons/resultset_next.png'
+    ,handler: function(b,e) {
+      if (cur_man == 8)
+      {
+        Ext.getCmp('id_man_' + cur_man).disable();
+        cur_man = 3;
+        Ext.getCmp('id_man_3').enable();  
+        Ext.getCmp('id_man_3').show();  
+      }
+      else
+      {
+        Ext.getCmp('id_man_' + cur_man).disable();
+        cur_man = cur_man+1;
+        Ext.getCmp('id_man_' + cur_man).enable();  
+        Ext.getCmp('id_man_' + cur_man).show();  
+      }
+    }
+  }]
+  ,bbar: new Ext.PagingToolbar({
+    pageSize: 10
+    ,store: m03_store
+    ,displayInfo: false
+    ,emptyMsg: 'No record to display'
+  })
+});
+
+var m07_grid = new Ext.grid.GridPanel({
+  frame: false
+  ,store: m03_store
+  ,columns: [new Ext.grid.RowNumberer({width: 30}),{
+    id: 'bhpp_code'    
+    ,header: '<b>รหัส สนย.</b>'
+    ,dataIndex: 'bhpp_code'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'person_code'
+    ,header: '<b>รหัส กอง จ.</b>'
+    ,dataIndex: 'person_code'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'office'
+    ,header: '<b>ชื่อหน่วยงาน</b>'
+    ,dataIndex: 'office'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'pid'
+    ,header: '<b>เลขที่บัตรประชาชน</b>'
+    ,dataIndex: 'pid'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'fname'
+    ,header: '<b>ชื่อ</b>'
+    ,dataIndex: 'fname'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'lname'
+    ,header: '<b>นามสกุล</b>'
+    ,dataIndex: 'lname'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'sex'
+    ,header: '<b>เพศ</b>'
+    ,dataIndex: 'sex'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'detail'
+    ,header: ''
+    ,width: 30
+    ,dataIndex: ''
+    ,renderer: addImage
+  }]
+  ,viewConfig: {
+    forceFit: true,
+  }
+  ,tbar: [{
+    xtype: 'tbbutton'
+    ,cls: 'x-btn-text-icon'
+    ,icon: 'icons/add.png'
+    ,text: 'Add'
+  },'-',{
+    xtype: 'tbbutton'
+    ,cls: 'x-btn-text-icon'
+    ,icon: 'icons/delete.png'
+    ,text: 'Delete'
+  },'->',{
+    xtype: 'tbbutton'
+    ,id: 'id_next'
+    ,text: ''
+    ,tooltip: 'บันทึกข้อมูลบุคลากรประเภทต่อไป!'
+    ,cls: 'x-btn-icon'
+    ,icon: 'icons/resultset_next.png'
+    ,handler: function(b,e) {
+      if (cur_man == 8)
+      {
+        Ext.getCmp('id_man_' + cur_man).disable();
+        cur_man = 3;
+        Ext.getCmp('id_man_3').enable();  
+        Ext.getCmp('id_man_3').show();  
+      }
+      else
+      {
+        Ext.getCmp('id_man_' + cur_man).disable();
+        cur_man = cur_man+1;
+        Ext.getCmp('id_man_' + cur_man).enable();  
+        Ext.getCmp('id_man_' + cur_man).show();  
+      }
+    }
+  }]
+  ,bbar: new Ext.PagingToolbar({
+    pageSize: 10
+    ,store: m03_store
+    ,displayInfo: false
+    ,emptyMsg: 'No record to display'
+  })
+});
+
+var m08_grid = new Ext.grid.GridPanel({
+  frame: false
+  ,store: m03_store
+  ,columns: [new Ext.grid.RowNumberer({width: 30}),{
+    id: 'bhpp_code'    
+    ,header: '<b>รหัส สนย.</b>'
+    ,dataIndex: 'bhpp_code'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'person_code'
+    ,header: '<b>รหัส กอง จ.</b>'
+    ,dataIndex: 'person_code'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'office'
+    ,header: '<b>ชื่อหน่วยงาน</b>'
+    ,dataIndex: 'office'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'pid'
+    ,header: '<b>เลขที่บัตรประชาชน</b>'
+    ,dataIndex: 'pid'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'fname'
+    ,header: '<b>ชื่อ</b>'
+    ,dataIndex: 'fname'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'lname'
+    ,header: '<b>นามสกุล</b>'
+    ,dataIndex: 'lname'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'sex'
+    ,header: '<b>เพศ</b>'
+    ,dataIndex: 'sex'
+    ,width: 100
+    ,sortable: true
+  },{
+    id: 'detail'
+    ,header: ''
+    ,width: 30
+    ,dataIndex: ''
+    ,renderer: addImage
+  }]
+  ,viewConfig: {
+    forceFit: true,
+  }
+  ,tbar: [{
+    xtype: 'tbbutton'
+    ,cls: 'x-btn-text-icon'
+    ,icon: 'icons/add.png'
+    ,text: 'Add'
+  },'-',{
+    xtype: 'tbbutton'
+    ,cls: 'x-btn-text-icon'
+    ,icon: 'icons/delete.png'
+    ,text: 'Delete'
+  },'->',{
+    xtype: 'tbbutton'
+    ,id: 'id_next'
+    ,text: ''
+    ,tooltip: 'บันทึกข้อมูลบุคลากรประเภทต่อไป!'
+    ,cls: 'x-btn-icon'
+    ,icon: 'icons/resultset_next.png'
+    ,handler: function(b,e) {
+      if (cur_man == 8)
+      {
+        Ext.getCmp('id_man_' + cur_man).disable();
+        cur_man = 3;
+        Ext.getCmp('id_man_3').enable();  
+        Ext.getCmp('id_man_3').show();  
+      }
+      else
+      {
+        Ext.getCmp('id_man_' + cur_man).disable();
+        cur_man = cur_man+1;
+        Ext.getCmp('id_man_' + cur_man).enable();  
+        Ext.getCmp('id_man_' + cur_man).show();  
+      }
+    }
+  }]
+  ,bbar: new Ext.PagingToolbar({
+    pageSize: 10
+    ,store: m03_store
+    ,displayInfo: false
+    ,emptyMsg: 'No record to display'
+  })
+});
+
+northBox = new Ext.BoxComponent({
+  region: 'north'
+  ,height: 100
+  ,style: 'background-image:url(/man52/images/mainpage.png);background-repeat:no-repeat;'
+});
+
+var off_btn = new Ext.Button({
+  text: cur_office
+  ,width: '100%'
+  ,style: 'padding-bottom:10px;'
+  ,handler: function() {
+    Ext.getCmp('id_man_' + cur_man).disable();
+    cur_man = 3;
+    Ext.getCmp('id_man_3').enable();
+    Ext.getCmp('id_man_3').show();
+  }
+});
+
+var logout_btn = new Ext.Button({
+  text: 'Logout'
+  ,width: '100%'
+  ,style: 'padding-bottom:10px;'
+  ,handler: function() {
+    debugger;
+    window.location.href = '/man52';
+  }
+});
+
+westPanel = {
+  id: 'id-west'
+  ,title: '<center><b>หน่วยงาน: ' + office + '</b></center>'
+  ,region: 'west'
+  ,autoHeight: true
+  ,width: 225
+  ,margins: '0 0 0 0'
+  ,collapsible: false  
+  ,items: [off_btn,logout_btn]
+}
+
+centerPanel = {
+  id: 'id-center'
+  ,region: 'center'
+  ,hideCollapseTool: true
+  ,hideMode: 'offsets'
+  ,xtype: 'tabpanel'
+  ,border: false
+  ,bodyBorder: false
+  ,bodyStyle: 'margins:0;'
+  ,activeTab: 2
+  ,items: [{
+    title: 'ข้าราชการ'
+    ,id: 'id_man_1'
+    ,disabled: true
+  },{
+    title: 'ลูกจ้างประจำ'
+    ,id: 'id_man_2'
+    ,disabled: true
+  },{
+    title: 'พนักงานราชการ'
+    ,id: 'id_man_3'
+    ,layout: 'fit'
+    //,items: [m03_grid]
+  },{
+    title: 'ลูกจ้างชั่วคราว'
+    ,id: 'id_man_4'
+    ,disabled: true
+    ,layout: 'fit'
+    ,items: [m04_grid]
+  },{
+    title: 'ข้าราชการ PCU'
+    ,id: 'id_man_5'
+    ,disabled: true
+    ,layout: 'fit'
+    ,items: [m05_grid]
+  },{
+    title: 'ลูกจ้างประจำ PCU'
+    ,id: 'id_man_6'
+    ,disabled: true
+    ,layout: 'fit'
+    ,items: [m06_grid]
+  },{
+    title: 'พนักงานราชการ PCU'
+    ,id: 'id_man_7'
+    ,disabled: true
+    ,layout: 'fit'
+    ,items: [m07_grid]
+  },{
+    title: 'ลูกจ้างชั่วคราว PCU'
+    ,id: 'id_man_8'
+    ,disabled: true
+    ,layout: 'fit'
+    ,items: [m08_grid]
+  }]
+}
+
+Ext.onReady(function() {
+  var container = new Ext.Viewport ({
+    layout: 'border'
+    ,renderTo: Ext.getBody()
+    ,defaults: {
+      collapsible: true
+      ,split: true
+      ,bodyStyle: 'padding:15px'
+    }
+    ,items: [northBox,westPanel,centerPanel]
+  });
+});

@@ -1,0 +1,39 @@
+#!/usr/bin/ruby
+
+require 'cgi'
+require 'postgres'
+
+c = CGI::new
+kw = c['key']
+start = c['start'].to_s.to_i
+limit = c['limit'].to_s.to_i
+limit = 10 if (limit == 0)
+
+con = PGconn.connect("203.157.240.9",5432,nil,nil,"manpower52","postgres")
+sql = "SELECT e_code,e_desc "
+sql += "FROM code_education "
+sql += "WHERE e_code || e_desc LIKE '%#{kw}%' "
+res = con.exec(sql)
+totalCount = res.num_tuples
+sql += "ORDER BY e_code "
+sql += "LIMIT #{limit} OFFSET #{start} "
+res = con.exec(sql)
+con.close
+
+a = Array.new
+
+res.each do |rec|
+  code = rec[0]
+  desc = rec[1]
+  i = "{'e_code':'#{code}','e_desc':'#{desc}'}"
+  a.push(i)
+end
+
+data = "{success:'true', 'totalCount':'#{totalCount}','rows':"
+data += "[#{a.join(',')}]}"
+
+print <<EOF
+Content-type: text/html
+
+#{data}
+EOF

@@ -1,0 +1,11 @@
+create table members (
+  m_login  varchar,
+  m_password  varchar,
+  m_fname  varchar,
+  m_lname  varchar,
+  m_office  varchar,
+  m_telno  varchar,
+  m_email  varchar
+);
+grant all on members to public;
+

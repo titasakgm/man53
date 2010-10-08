@@ -1,0 +1,16 @@
+delete from pis;
+alter sequence pis_id_seq restart with 1;
+delete from emp;
+alter sequence emp_id_seq restart with 1;
+delete from epn;
+alter sequence epn_id_seq restart with 1;
+delete from gmp;
+alter sequence gmp_id_seq restart with 1;
+delete from pcupis;
+alter sequence pcupis_id_seq restart with 1;
+delete from pcuemp;
+alter sequence pcuemp_id_seq restart with 1;
+delete from pcuepn;
+alter sequence pcuepn_id_seq restart with 1;
+delete from pcugmp;
+alter sequence pcugmp_id_seq restart with 1;

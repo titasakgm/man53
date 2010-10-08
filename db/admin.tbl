@@ -1,0 +1,11 @@
+create table admin (
+  a_login  varchar,
+  a_password  varchar,
+  a_fname  varchar,
+  a_lname  varchar,
+  a_office  varchar,
+  a_telno  varchar,
+  a_email  varchar
+);
+grant all on admin to public;
+insert into admin (a_login,a_password) values ('admin','admin');
