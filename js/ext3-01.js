@@ -12,7 +12,7 @@ var loginForm = {
       tag: 'div'
       ,html: '<div class="app-msg"> \
               <img src="images/people.png" class="app-img" /> \
-              Login to Manpower 2552</div>'
+              Login to Manpower 2553</div>'
     }
   },{
     xtype: 'textfield'
@@ -71,9 +71,9 @@ function loginFormSubmit()
       {
         win.destroy();
         if (login == 'admin')
-          window.location = "/man52/admin-01.rb";
+          window.location = "/man53/admin-01.rb";
         else
-          window.location = "/man52/man-01.rb?hcode=" + hcode + "&office=" + office + "&login=" + login + "&lock=" + lock + "&hc_flag=" + hc_flag;
+          window.location = "/man53/man-01.rb?hcode=" + hcode + "&office=" + office + "&login=" + login + "&lock=" + lock + "&hc_flag=" + hc_flag;
       }
       else
       {

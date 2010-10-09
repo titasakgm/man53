@@ -725,7 +725,7 @@ var progressGrid = new Ext.grid.GridPanel({
 var northBox = new Ext.BoxComponent({
   region: 'north'
   ,height: 100
-  ,style: 'background-image:url(/man52/images/mainpage.png);background-repeat:no-repeat;'
+  ,style: 'background-image:url(/man53/images/mainpage.png);background-repeat:no-repeat;'
 });
 
 var btns = [];
@@ -788,7 +788,7 @@ var logout_btn = new Ext.Button({
   ,width: '100%'
   ,style: 'padding-bottom:10px;'
   ,handler: function() {
-    window.location.href = '/man52';
+    window.location.href = '/man53';
   }
 });
 btns.push(logout_btn);

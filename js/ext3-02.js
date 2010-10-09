@@ -74,6 +74,12 @@ hns = office.split('|');
 lck = lock.split('|');
 hcf = hc_flag.split('|');
 
+cur_ssjsso = 'f'
+if (office.match('สสจ.').index == 0)
+  cur_ssjsso = 't';
+else if (office.match('สสอ.').index == 0)
+  cur_ssjsso = 't';
+
 cur_hcode = hcs[0];
 cur_office = hns[0];
 cur_hcflag = hcf[0];
@@ -101,22 +107,30 @@ var add_flag, delete_flag, lock_flag, unlock_flag, next_flag, save_flag;
 //Add flag to be active when otype=6 (สอ.)
 var m01_flag, m05_flag;
 
-if (cur_hcflag == 't')
-{
-  cur_gridlock = m05lock;
-  cur_man = 5;
-  active_tab = 4;
-  m01_flag = true;
-  m05_flag = false;
-}
-else
-{
-  cur_gridlock = m01lock;
-  cur_man = 1;
-  active_tab = 0;
-  m01_flag = false;
-  m05_flag = true;
-}
+
+////if (cur_hcflag == 't')
+////{
+  ////cur_gridlock = m05lock;
+  ////cur_man = 5;
+  ////active_tab = 4;
+  ////m01_flag = true;
+  ////m05_flag = false;
+////}
+////else
+////{
+  ////cur_gridlock = m01lock;
+  ////cur_man = 1;
+  ////active_tab = 0;
+  ////m01_flag = false;
+  ////m05_flag = true;
+////}
+
+//// For man53 all lock start with 1
+cur_gridlock = m01lock;
+cur_man = 1;
+active_tab = 0;
+m01_flag = false;
+m05_flag = true;
 
 setAddDeleteLockUnlockNext();
 
@@ -765,7 +779,7 @@ if (!inputform)
           ,border: false
           ,items: [{
             xtype: 'button'
-            ,icon: '/man52/icons/find.png'
+            ,icon: '/man53/icons/find.png'
             ,handler: function(b,e){
 			  cur_edu_level = 'id_inputform_per_edu_first';
               showSearchDegreeForm();
@@ -792,7 +806,7 @@ if (!inputform)
           ,border: false
           ,items: [{
             xtype: 'button'
-            ,icon: '/man52/icons/find.png'
+            ,icon: '/man53/icons/find.png'
             ,handler: function(b,e){
 			  cur_edu_level = 'id_inputform_per_edu_top';
               showSearchDegreeForm();
@@ -819,7 +833,7 @@ if (!inputform)
           ,border: false
           ,items: [{
             xtype: 'button'
-            ,icon: '/man52/icons/find.png'
+            ,icon: '/man53/icons/find.png'
             ,handler: function(b,e){
 			  cur_pos_level = 'id_inputform_per_pos_j18';
               showSearchPosForm();
@@ -846,7 +860,7 @@ if (!inputform)
           ,border: false
           ,items: [{
             xtype: 'button'
-            ,icon: '/man52/icons/find.png'
+            ,icon: '/man53/icons/find.png'
             ,handler: function(b,e){
 			  cur_pos_level = 'id_inputform_per_pos_active';
               showSearchPosForm();
@@ -1089,7 +1103,7 @@ function showAddForm() {
           ,border: false
           ,items: [{
             xtype: 'button'
-            ,icon: '/man52/icons/find.png'
+            ,icon: '/man53/icons/find.png'
             ,handler: function(b,e){
 			  cur_edu_level = 'id_addform_per_edu_first';
               showSearchDegreeForm();
@@ -1115,7 +1129,7 @@ function showAddForm() {
           ,border: false
           ,items: [{
             xtype: 'button'
-            ,icon: '/man52/icons/find.png'
+            ,icon: '/man53/icons/find.png'
             ,handler: function(b,e){
 			  cur_edu_level = 'id_addform_per_edu_top';
               showSearchDegreeForm();
@@ -1141,7 +1155,7 @@ function showAddForm() {
           ,border: false
           ,items: [{
             xtype: 'button'
-            ,icon: '/man52/icons/find.png'
+            ,icon: '/man53/icons/find.png'
             ,handler: function(b,e){
 			  cur_pos_level = 'id_addform_per_pos_j18';
               showSearchPosForm();
@@ -1167,7 +1181,7 @@ function showAddForm() {
           ,border: false
           ,items: [{
             xtype: 'button'
-            ,icon: '/man52/icons/find.png'
+            ,icon: '/man53/icons/find.png'
             ,handler: function(b,e){
 			  cur_pos_level = 'id_addform_per_pos_active';
               showSearchPosForm();
@@ -1267,42 +1281,42 @@ function reloadCurrentStore()
   if (cur_man == 1)
   {
       start = m01_grid.getBottomToolbar().cursor;
-	  m01_store.load({params: {start:start, limit:10} });
+      m01_store.load({params: {start:start, limit:10} });
   }
   else if (cur_man == 2)
   {
       start = m02_grid.getBottomToolbar().cursor;
-	  m02_store.load({params: {start:start, limit:10} });
+      m02_store.load({params: {start:start, limit:10} });
   }
   else if (cur_man == 3)
   {
       start = m03_grid.getBottomToolbar().cursor;
-	  m03_store.load({params: {start:start, limit:10} });
+      m03_store.load({params: {start:start, limit:10} });
   }
   else if (cur_man == 4)
   {
       start = m04_grid.getBottomToolbar().cursor;
-	  m04_store.load({params: {start:start, limit:10} });
+      m04_store.load({params: {start:start, limit:10} });
   }
   else if (cur_man == 5)
   {
       start = m05_grid.getBottomToolbar().cursor;
-	  m05_store.load({params: {start:start, limit:10} });
+      m05_store.load({params: {start:start, limit:10} });
   }
   else if (cur_man == 6)
   {
       start = m06_grid.getBottomToolbar().cursor;
-	  m06_store.load({params: {start:start, limit:10} });
+      m06_store.load({params: {start:start, limit:10} });
   }
   else if (cur_man == 7)
   {
       start = m07_grid.getBottomToolbar().cursor;
-	  m07_store.load({params: {start:start, limit:10} });
+      m07_store.load({params: {start:start, limit:10} });
   }
   else if (cur_man == 8)
   {
       start = m08_grid.getBottomToolbar().cursor;
-	  m08_store.load({params: {start:start, limit:10} });
+      m08_store.load({params: {start:start, limit:10} });
   }
 }
 
@@ -1596,63 +1610,62 @@ var m01_grid = new Ext.grid.GridPanel({
     ,handler: function(b,e) {
       Ext.getCmp('id_man_1').disable();
       cur_man = 2;
-	  m02_store.baseParams = {hcode: cur_hcode};
-	  m02_store.load({params:{start:0, limit: 10}});
+      m02_store.baseParams = {hcode: cur_hcode};
+      m02_store.load({params:{start:0, limit: 10}});
       Ext.getCmp('id_man_2').enable();
       Ext.getCmp('id_man_2').show();
-	  cur_gridlock = m02lock;
-	  if (cur_gridlock == 't')
+      cur_gridlock = m02lock;
+      if (cur_gridlock == 't')
       {
         Ext.getCmp('id_m02_add_btn').disable();
         Ext.getCmp('id_m02_delete_btn').disable();
         Ext.getCmp('id_m02_unlock_btn').enable();
         Ext.getCmp('id_m02_lock_btn').disable();
         Ext.getCmp('id_m02_next_btn').enable();
-		save_flag = true;
+        save_flag = true;
       }
-	  else
+      else
       {
         Ext.getCmp('id_m02_add_btn').enable();
         Ext.getCmp('id_m02_delete_btn').disable();
         Ext.getCmp('id_m02_unlock_btn').disable();
         Ext.getCmp('id_m02_lock_btn').enable();
         Ext.getCmp('id_m02_next_btn').disable();
-		save_flag = false;
+        save_flag = false;
       }
 	}
   }]
   ,listeners: {
     cellclick: function(grid, rowIndex, columnIndex, e){
       var data = grid.getStore().data.items[rowIndex].data;
-
-	  cur_id = data.id;
-	  cur_cid = data.cid;
-	  cur_hcode = data.hcode;
-	  cur_piscode = data.piscode;
-	  cur_otype = data.otype;
+      cur_id = data.id;
+      cur_cid = data.cid;
+      cur_hcode = data.hcode;
+      cur_piscode = data.piscode;
+      cur_otype = data.otype;
       cur_fname = data.fname;
       cur_lname = data.lname;
-	  cur_sex = parseInt(data.sex);
+      cur_sex = parseInt(data.sex);
 
       if (columnIndex == 8)
       {
         var con = new Ext.data.Connection();
-		con.request({
+        con.request({
           url: 'rb/ajGetEduPos.rb'
-		  ,params: {id: cur_id, ptype: cur_man}
-		  ,success: function(resp, opt){
+	  ,params: {id: cur_id, ptype: cur_man}
+	  ,success: function(resp, opt){
             var json = Ext.util.JSON.decode(resp.responseText);
-			cur_edu_first_code = json.edu_first_code;
-			cur_edu_first_text = json.edu_first_text;
+            cur_edu_first_code = json.edu_first_code;
+            cur_edu_first_text = json.edu_first_text;
             cur_edu_top_code = json.edu_top_code;
             cur_edu_top_text = json.edu_top_text;
-			cur_pos_j18_code = json.pos_j18_code;
-			cur_pos_j18_text = json.pos_j18_text;
-			cur_pos_active_code = json.pos_active_code;
-			cur_pos_active_text = json.pos_active_text;
-			showInputForm();
+            cur_pos_j18_code = json.pos_j18_code;
+            cur_pos_j18_text = json.pos_j18_text;
+            cur_pos_active_code = json.pos_active_code;
+            cur_pos_active_text = json.pos_active_text;
+            showInputForm();
           }
-		  ,failure: function(resp,opt){
+          ,failure: function(resp,opt){
             Ext.Msg.show({
               title: 'Warning'
               ,msg: 'ไม่สามารถเรียกดูข้อมูลจาก Server ได้'
@@ -1660,9 +1673,9 @@ var m01_grid = new Ext.grid.GridPanel({
               ,buttons: Ext.Msg.OK
               ,modal: true
             });
-			return false;
+            return false;
           }
-		});
+	});
       }
     } //eo cellclick
   } //eo listeners
@@ -2415,12 +2428,12 @@ var m04_grid = new Ext.grid.GridPanel({
     } // eo handler
   },'-',{
     xtype: 'tbbutton'
-	,id: 'id_m04_unlock_btn'
-	,disabled: unlock_flag
+    ,id: 'id_m04_unlock_btn'
+    ,disabled: unlock_flag
     ,cls: 'x-btn-text-icon'
     ,icon: 'icons/lock_open.png'
     ,text: 'Unlock'
-	,tooltip: 'กดปุ่มนี้เพื่อปลด Lock และทำการแก้ไขข้อมูลใหม่'
+    ,tooltip: 'กดปุ่มนี้เพื่อปลด Lock และทำการแก้ไขข้อมูลใหม่'
     ,handler: function(b, e){
 	  Ext.getCmp('id_m04_lock_btn').enable();
 	  Ext.getCmp('id_m04_next_btn').disable();
@@ -2435,12 +2448,12 @@ var m04_grid = new Ext.grid.GridPanel({
     }
   },'-',{
     xtype: 'tbbutton'
-	,id: 'id_m04_lock_btn'
-	,disabled: lock_flag
+    ,id: 'id_m04_lock_btn'
+    ,disabled: lock_flag
     ,cls: 'x-btn-text-icon'
     ,icon: 'icons/lock.png'
     ,text: 'Lock'
-	,tooltip: 'กดปุ่มนี้เพื่อ Lock ข้อมูลเมื่อเสร็จสิ้นการแก้ไขข้อมูล และทำการแก้ไขประเภทบุคลากรอื่นต่อไป'
+    ,tooltip: 'กดปุ่มนี้เพื่อ Lock ข้อมูลเมื่อเสร็จสิ้นการแก้ไขข้อมูล และทำการแก้ไขประเภทบุคลากรอื่นต่อไป'
     ,handler: function(b, e){
 	  Ext.getCmp('id_m04_unlock_btn').enable();
 	  Ext.getCmp('id_m04_next_btn').enable();
@@ -2455,110 +2468,140 @@ var m04_grid = new Ext.grid.GridPanel({
     }
   },'-',{
     xtype: 'tbbutton'
-	,id: 'id_m04_search_text'
+    ,id: 'id_m04_search_text'
     ,cls: 'x-btn-text'
-	,text: 'Search'
-	,handler: function() {
+    ,text: 'Search'
+    ,handler: function() {
       var o = Ext.getCmp('id_m04_kw');
-	  o.setValue('');
-	  o.focus();
-	  kws = '';
+      o.setValue('');
+      o.focus();
+      kws = '';
     }
   },{
     xtype: 'textfield'
-	,id: 'id_m04_kw'
+    ,id: 'id_m04_kw'
     ,value: kws
     ,enableKeyEvents: true
     ,listeners: {
       specialkey: function(field, el){
-		if (el.getKey() == Ext.EventObject.ENTER)
-		{
+	if (el.getKey() == Ext.EventObject.ENTER)
+	{
           kws = field.getValue();
-		  searchPerson(kws);
-		}
-      }
-	}
-  },{
-    xtype: 'tbbutton'
-	,id: 'id_m04_search_btn'
-    ,cls: 'x-btn-text-icon'
-    ,icon: 'icons/zoom.png'
-	,handler: function() {
-      kws= Ext.getCmp('id_m04_kw').getValue();
 	  searchPerson(kws);
 	}
+      }
+    }
+  },{
+    xtype: 'tbbutton'
+    ,id: 'id_m04_search_btn'
+    ,cls: 'x-btn-text-icon'
+    ,icon: 'icons/zoom.png'
+    ,handler: function() {
+      kws= Ext.getCmp('id_m04_kw').getValue();
+      searchPerson(kws);
+    }
   },'->',{
     xtype: 'tbbutton'
     ,id: 'id_m04_next_btn'
-	,disabled: next_flag
+    ,disabled: next_flag
     ,text: 'Next'
     ,tooltip: 'บันทึกข้อมูลบุคลากรประเภทต่อไป!'
     ,cls: 'x-btn-text-icon'
     ,icon: 'icons/resultset_next.png'
     ,handler: function(b,e) {
       Ext.getCmp('id_man_4').disable();
-      cur_man = 5;
-      m05_store.baseParams = {hcode: cur_hcode};
-	  m05_store.load({params:{start:0, limit: 10}});
-      Ext.getCmp('id_man_5').enable();  
-      Ext.getCmp('id_man_5').show();
-	  cur_gridlock = m05lock;
-      if (cur_gridlock == 't')
+      //cur_hcflag = true for otype = 6,,
+      if (cur_hcflag == 't' || cur_ssjsso == 't')
       {
-        Ext.getCmp('id_m05_add_btn').disable();
-        Ext.getCmp('id_m05_delete_btn').disable();
-        Ext.getCmp('id_m05_unlock_btn').enable();
-        Ext.getCmp('id_m05_lock_btn').disable();
-        Ext.getCmp('id_m05_next_btn').enable();
-        save_flag = true;
+        cur_man = 1;
+        m01_store.baseParams = {hcode: cur_hcode};
+        m01_store.load({params:{start:0, limit: 10}});
+        Ext.getCmp('id_man_1').enable();
+        Ext.getCmp('id_man_1').show();
+        cur_gridlock = m01lock;
+        if (cur_gridlock == 't')
+        {
+          Ext.getCmp('id_m01_add_btn').disable();
+          Ext.getCmp('id_m01_delete_btn').disable();
+          Ext.getCmp('id_m01_unlock_btn').enable();
+          Ext.getCmp('id_m01_lock_btn').disable();
+          Ext.getCmp('id_m01_next_btn').enable();
+          save_flag = true;
+        }
+        else
+        {
+          Ext.getCmp('id_m01_add_btn').enable();
+          Ext.getCmp('id_m01_delete_btn').disable();
+          Ext.getCmp('id_m01_unlock_btn').disable();
+          Ext.getCmp('id_m01_lock_btn').enable();
+          Ext.getCmp('id_m01_next_btn').disable();
+          save_flag = false;
+        }
       }
-	  else
+      else
       {
-        Ext.getCmp('id_m05_add_btn').enable();
-        Ext.getCmp('id_m05_delete_btn').disable();
-        Ext.getCmp('id_m05_unlock_btn').disable();
-        Ext.getCmp('id_m05_lock_btn').enable();
-        Ext.getCmp('id_m05_next_btn').disable();
-        save_flag = false;
+        cur_man = 5;
+        m05_store.baseParams = {hcode: cur_hcode};
+        m05_store.load({params:{start:0, limit: 10}});
+        Ext.getCmp('id_man_5').enable();  
+        Ext.getCmp('id_man_5').show();
+        cur_gridlock = m05lock;
+        if (cur_gridlock == 't')
+        {
+          Ext.getCmp('id_m05_add_btn').disable();
+          Ext.getCmp('id_m05_delete_btn').disable();
+          Ext.getCmp('id_m05_unlock_btn').enable();
+          Ext.getCmp('id_m05_lock_btn').disable();
+          Ext.getCmp('id_m05_next_btn').enable();
+          save_flag = true;
+        }
+        else
+        {
+          Ext.getCmp('id_m05_add_btn').enable();
+          Ext.getCmp('id_m05_delete_btn').disable();
+          Ext.getCmp('id_m05_unlock_btn').disable();
+          Ext.getCmp('id_m05_lock_btn').enable();
+          Ext.getCmp('id_m05_next_btn').disable();
+          save_flag = false;
+        }
       }
-	}
+    }
   }]
   ,listeners: {
     cellclick: function(grid, rowIndex, columnIndex, e){
       var data = grid.getStore().data.items[rowIndex].data;
-
-	  cur_id = data.id;
-	  cur_cid = data.cid;
-	  cur_hcode = data.hcode;
-	  cur_piscode = data.piscode;
-	  cur_otype = data.otype;
+      cur_id = data.id;
+      cur_cid = data.cid;
+      cur_hcode = data.hcode;
+      cur_piscode = data.piscode;
+      cur_otype = data.otype;
       cur_fname = data.fname;
       cur_lname = data.lname;
-	  cur_sex = parseInt(data.sex);
+      cur_sex = parseInt(data.sex);
 
       if (columnIndex == 8)
       {
         var con = new Ext.data.Connection();
-		con.request({
+	con.request({
           url: 'rb/ajGetEduPos.rb'
-		  ,params: {id: cur_id, ptype: cur_man}
-		  ,success: function(resp, opt){
+	  ,params: {id: cur_id, ptype: cur_man}
+	  ,success: function(resp, opt){
             var json = Ext.util.JSON.decode(resp.responseText);
-			cur_edu_first_code = json.edu_first_code;
-			cur_edu_first_text = json.edu_first_text;
+	    cur_edu_first_code = json.edu_first_code;
+	    cur_edu_first_text = json.edu_first_text;
             cur_edu_top_code = json.edu_top_code;
             cur_edu_top_text = json.edu_top_text;
-			cur_pos_j18_code = json.pos_j18_code;
-			cur_pos_j18_text = json.pos_j18_text;
-			cur_pos_active_code = json.pos_active_code;
-			cur_pos_active_text = json.pos_active_text;
-			showInputForm();
+	    cur_pos_j18_code = json.pos_j18_code;
+	    cur_pos_j18_text = json.pos_j18_text;
+	    cur_pos_active_code = json.pos_active_code;
+	    cur_pos_active_text = json.pos_active_text;
+	    showInputForm();
           }
-		  ,failure: function(resp,opt){
+	  ,failure: function(resp,opt){
             Ext.Msg.alert('Server Response','Cannot retrieve Education and Position data!');
-			return false;
+	    return false;
           }
-		});
+	});
       }
     } //eo cellclick
   } //eo listeners
@@ -3664,13 +3707,13 @@ var m08_grid = new Ext.grid.GridPanel({
     ,enableKeyEvents: true
     ,listeners: {
       specialkey: function(field, el){
-		if (el.getKey() == Ext.EventObject.ENTER)
-		{
+	if (el.getKey() == Ext.EventObject.ENTER)
+	{
           kws = field.getValue();
-		  searchPerson(kws);
-		}
-      }
+	  searchPerson(kws);
 	}
+      }
+    }
   },{
     xtype: 'tbbutton'
 	,id: 'id_m08_search_btn'
@@ -3683,68 +3726,38 @@ var m08_grid = new Ext.grid.GridPanel({
   },'->',{
     xtype: 'tbbutton'
     ,id: 'id_m08_next_btn'
-	,disabled: next_flag
+    ,disabled: next_flag
     ,text: 'Next'
     ,tooltip: 'บันทึกข้อมูลบุคลากรประเภทต่อไป!'
     ,cls: 'x-btn-text-icon'
     ,icon: 'icons/resultset_next.png'
     ,handler: function(b,e) {
       Ext.getCmp('id_man_8').disable();
-	  if (cur_hcflag == 't')
-	  {
-        cur_man = 5;
-        m05_store.baseParams = {hcode: cur_hcode};
-	    m05_store.load({params:{start:0, limit: 10}});
-        Ext.getCmp('id_man_5').enable();  
-        Ext.getCmp('id_man_5').show();
-	    cur_gridlock = m05lock;
-        if (cur_gridlock == 't')
-        {
-          Ext.getCmp('id_m05_add_btn').disable();
-          Ext.getCmp('id_m05_delete_btn').disable();
-          Ext.getCmp('id_m05_unlock_btn').enable();
-          Ext.getCmp('id_m05_lock_btn').disable();
-          Ext.getCmp('id_m05_next_btn').enable();
-		  save_flag = true;
-        }
-	    else
-        {
-          Ext.getCmp('id_m05_add_btn').enable();
-          Ext.getCmp('id_m05_delete_btn').disable();
-          Ext.getCmp('id_m05_unlock_btn').disable();
-          Ext.getCmp('id_m05_lock_btn').enable();
-          Ext.getCmp('id_m05_next_btn').disable();
-		  save_flag = false;
-        }
-	  }	
+      cur_man = 1;
+      m01_store.baseParams = {hcode: cur_hcode};
+      m01_store.load({params:{start:0, limit: 10}});
+      Ext.getCmp('id_man_1').enable();  
+      Ext.getCmp('id_man_1').show();
+      cur_gridlock = m01lock;
+      if (cur_gridlock == 't')
+      {
+        Ext.getCmp('id_m01_add_btn').disable();
+        Ext.getCmp('id_m01_delete_btn').disable();
+        Ext.getCmp('id_m01_unlock_btn').enable();
+        Ext.getCmp('id_m01_lock_btn').disable();
+        Ext.getCmp('id_m01_next_btn').enable();
+        save_flag = true;
+      }
       else
-	  {
-		cur_man = 1;
-        m01_store.baseParams = {hcode: cur_hcode};
-	    m01_store.load({params:{start:0, limit: 10}});
-        Ext.getCmp('id_man_1').enable();  
-        Ext.getCmp('id_man_1').show();
-	    cur_gridlock = m01lock;
-        if (cur_gridlock == 't')
-        {
-          Ext.getCmp('id_m01_add_btn').disable();
-          Ext.getCmp('id_m01_delete_btn').disable();
-          Ext.getCmp('id_m01_unlock_btn').enable();
-          Ext.getCmp('id_m01_lock_btn').disable();
-          Ext.getCmp('id_m01_next_btn').enable();
-          save_flag = true;
-		}
-	    else
-        {
-          Ext.getCmp('id_m01_add_btn').enable();
-          Ext.getCmp('id_m01_delete_btn').disable();
-          Ext.getCmp('id_m01_unlock_btn').disable();
-          Ext.getCmp('id_m01_lock_btn').enable();
-          Ext.getCmp('id_m01_next_btn').disable();
-          save_flag = false;
-        }
-	  }
-	}
+      {
+        Ext.getCmp('id_m01_add_btn').enable();
+        Ext.getCmp('id_m01_delete_btn').disable();
+        Ext.getCmp('id_m01_unlock_btn').disable();
+        Ext.getCmp('id_m01_lock_btn').enable();
+        Ext.getCmp('id_m01_next_btn').disable();
+        save_flag = false;
+      }
+    }
   }]
   ,listeners: {
     cellclick: function(grid, rowIndex, columnIndex, e){
@@ -3797,7 +3810,7 @@ var m08_grid = new Ext.grid.GridPanel({
 northBox = new Ext.BoxComponent({
   region: 'north'
   ,height: 100
-  ,style: 'background-image:url(/man52/images/mainpage.png);background-repeat:no-repeat;'
+  ,style: 'background-image:url(/man53/images/mainpage.png);background-repeat:no-repeat;'
 });
 
 function showLock(val, x, store){
@@ -3939,20 +3952,20 @@ var showLockGrid = function(){
 
   if (!win)
   {
-	  var win = new Ext.Window({
-        id: 'id_progress_win'
-		,title: 'Progress Report'
-		,width: 600
-		,autoHeight: true
-        ,closable: true
-		,resizable: false
-		,plain	: true
-		,border: false
-		,draggable: true 
-		,modal: true
-		,layout: 'fit'
-		,items: [ rep_progress_grid ]
-	  });
+    var win = new Ext.Window({
+      id: 'id_progress_win'
+      ,title: 'Progress Report'
+      ,width: 600
+      ,autoHeight: true
+      ,closable: true
+      ,resizable: false
+      ,plain	: true
+      ,border: false
+      ,draggable: true 
+      ,modal: true
+      ,layout: 'fit'
+      ,items: [ rep_progress_grid ]
+    });
   }
   win.show();
   //win.center();
@@ -3979,30 +3992,19 @@ for (var i=0;i<hcs.length;i++ )
     ,toggleGroup: 'office_btn'
     ,enableToggle: true
     ,handler: function() {
-	  cur_hcode = this.id;
-	  cur_office = this.text;
+      cur_hcode = this.id;
+      cur_office = this.text;
       cur_hcflag = this.hcf;
-	  var title = '<b>หน่วยงาน' + '<br/><font color="green">:: ' + this.text + '</font></b>';
-	  Ext.getCmp('id_west').setTitle(title);      Ext.getCmp('id_man_' + cur_man).disable();
-	  resetAllLocks();
-      if (cur_hcflag == 't')
-	  {
-        cur_man = 5;
-		cur_gridlock = m05lock;
-        Ext.getCmp('id_man_5').enable();
-        Ext.getCmp('id_man_5').show();
-	    m05_store.baseParams = {hcode: this.id};
-        m05_store.load({params:{start:0, limit: 10}});
-	  }
-      else
-	  {
-        cur_man = 1;
-		cur_gridlock = m01lock;
-        Ext.getCmp('id_man_1').enable();
-        Ext.getCmp('id_man_1').show();
-	    m01_store.baseParams = {hcode: this.id};
-        m01_store.load({params:{start:0, limit: 10}});
-	  }
+      var title = '<b>หน่วยงาน' + '<br/><font color="green">:: ' + this.text + '</font></b>';
+      Ext.getCmp('id_west').setTitle(title);
+      Ext.getCmp('id_man_' + cur_man).disable();
+      resetAllLocks();
+      cur_man = 1;
+      cur_gridlock = m01lock;
+      Ext.getCmp('id_man_1').enable();
+      Ext.getCmp('id_man_1').show();
+      m01_store.baseParams = {hcode: this.id};
+      m01_store.load({params:{start:0, limit: 10}});
     }
   });
   btns.push(btn);
@@ -4022,7 +4024,7 @@ var logout_btn = new Ext.Button({
   ,width: '100%'
   ,style: 'padding-bottom:10px;'
   ,handler: function() {
-    window.location.href = '/man52';
+    window.location.href = '/man53';
   }
 });
 

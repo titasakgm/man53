@@ -115,7 +115,7 @@ var m03_grid = new Ext.grid.GridPanel({
 northBox = new Ext.BoxComponent({
   region: 'north'
   ,height: 100
-  ,style: 'background-image:url(/man52/images/mainpage.png);background-repeat:no-repeat;'
+  ,style: 'background-image:url(/man53/images/mainpage.png);background-repeat:no-repeat;'
 });
 
 westPanel = {
