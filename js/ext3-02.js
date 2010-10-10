@@ -75,9 +75,9 @@ lck = lock.split('|');
 hcf = hc_flag.split('|');
 
 cur_ssjsso = 'f'
-if (office.match('สสจ.').index == 0)
+if (office.match('สสจ.'))
   cur_ssjsso = 't';
-else if (office.match('สสอ.').index == 0)
+else if (office.match('สสอ.'))
   cur_ssjsso = 't';
 
 cur_hcode = hcs[0];
