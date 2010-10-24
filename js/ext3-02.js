@@ -518,18 +518,20 @@ var smPos = new Ext.grid.RowSelectionModel({
       fn: function(sm,index,record){
         cur_poscode = record.data.pos_code;
         cur_posname = record.data.pos_name;
-		Ext.getCmp(cur_pos_level).setValue(cur_posname);
-		Ext.getCmp('id_searchpos_win').hide();
-		if (cur_pos_level == 'id_addform_per_pos_j18' || cur_pos_level == 'id_inputform_per_pos_j18' )
+        Ext.getCmp(cur_pos_level).setValue(cur_posname);
+        Ext.getCmp('id_searchpos_win').hide();
+        if (cur_pos_level == 'id_addform_per_pos_j18' || cur_pos_level == 'id_inputform_per_pos_j18' )
         {
-          cur_pos_j18_code = cur_poscode;
-          cur_pos_j18_text = cur_posname;
-	    }
+          //cur_pos_j18_code = cur_poscode;
+          //cur_pos_j18_text = cur_posname;
+          cur_pos_j18_code = '99999'
+          cur_pos_j18_text = 'ไม่ต้องระบุ'
+        }
         else
         {
           cur_pos_active_code = cur_poscode;
           cur_pos_active_text = cur_posname;
-	    }
+        }
       }
     }
   }
@@ -638,18 +640,18 @@ Ext.apply(Ext.form.VTypes,{
   ,cidMask: /[0-9]/
 });
 
-Ext.apply(Ext.form.VTypes,{
-  piscode: function(val, field){
-    try{
-      var  piscode = field.getValue();
-      return  piscode.length == 5;
-    } catch(e) {
-      return false;
-    }
-  }
-  ,piscodeText: 'รับค่าได้เฉพาะตัวเลข 0-9 จำนวน 5 หลักเท่านั้น'
-  ,piscodeMask: /[0-9]/
-});
+//Ext.apply(Ext.form.VTypes,{
+  //piscode: function(val, field){
+    //try{
+      //var  piscode = field.getValue();
+      //return  piscode.length == 5;
+    //} catch(e) {
+      //return false;
+    //}
+  //}
+  //,piscodeText: 'รับค่าได้เฉพาะตัวเลข 0-9 จำนวน 5 หลักเท่านั้น'
+  //,piscodeMask: /[0-9]/
+//});
 
 function showInputForm() {
 if (!inputform)
@@ -690,8 +692,8 @@ if (!inputform)
             ,labelWidth: 75
             ,xtype: 'textfield'
             ,anchor: '90%'
-			,value: cur_piscode
-            ,vtype: 'piscode'
+            ,value: cur_piscode
+            //,vtype: 'piscode'
           }]
         },{
           columnWidth: 1
@@ -701,12 +703,12 @@ if (!inputform)
           ,items: [{
             name: 'per_cid'
             ,id: 'id_inputform_per_cid'
-			,fieldLabel: 'เลขที่บัตรประชาชน'
+            ,fieldLabel: 'เลขที่บัตรประชาชน'
             ,labelWidth: 75
             ,xtype: 'textfield'
             ,anchor: '90%'
-			,value: cur_cid
-			,vtype: 'cid'
+            ,value: cur_cid
+            ,vtype: 'cid'
           }]
         },{
           columnWidth: 1
@@ -819,14 +821,15 @@ if (!inputform)
           ,border: false
           ,items: [{
             name: 'per_pos_j18'
-			,id: 'id_inputform_per_pos_j18'
+	    ,id: 'id_inputform_per_pos_j18'
             ,xtype: 'textfield'
-			,fieldLabel: 'ตำแหน่งตาม จ.18'
+	    ,fieldLabel: 'ตำแหน่งตาม จ.18'
             ,labelWidth: 75
-            ,emptyText: 'ระบุ'
+            ,emptyText: 'ไม่ต้องระบุ'
             ,anchor: '100%'
-			,disabled: true
-            ,value: cur_pos_j18_text
+	    ,disabled: true
+            //,value: cur_pos_j18_text
+            ,value: 'ไม่ต้องระบุ'
           }]
         },{
           columnWidth: .1
@@ -835,8 +838,10 @@ if (!inputform)
             xtype: 'button'
             ,icon: '/man53/icons/find.png'
             ,handler: function(b,e){
-			  cur_pos_level = 'id_inputform_per_pos_j18';
-              showSearchPosForm();
+	      //cur_pos_level = 'id_inputform_per_pos_j18';
+              //showSearchPosForm();
+              Ext.Msg.alert('Info','ยกเลิกข้อมูลนี้แล้ว');
+              return false;
             }
           }]
         },{
@@ -916,9 +921,9 @@ if (!inputform)
 		,id: 'id_save_inputform_btn'
 		,disabled: save_flag
         ,handler: function() {
-		  debugger;
-		  cur_pos_j18 = Ext.getCmp('id_inputform_per_pos_j18').getValue();
-		  cur_pos_active = Ext.getCmp('id_inputform_per_pos_active').getValue();
+	  //cur_pos_j18 = Ext.getCmp('id_inputform_per_pos_j18').getValue();
+	  cur_pos_j18 = '99999';
+	  cur_pos_active = Ext.getCmp('id_inputform_per_pos_active').getValue();
           Ext.getCmp('id_inputform').getForm().submit({
             method: 'POST'
             ,params: {
@@ -926,14 +931,15 @@ if (!inputform)
               ,per_otype: cur_otype
               ,per_type: cur_man
               ,per_login: cur_login
-		      ,per_edu_first: cur_edu_first_code
-		      ,per_edu_top: cur_edu_top_code
-		      ,per_pos_j18: cur_pos_j18_code
-		      ,per_pos_active: cur_pos_active_code
+              ,per_edu_first: cur_edu_first_code 
+              ,per_edu_top: cur_edu_top_code
+              //,per_pos_j18: cur_pos_j18_code
+              ,per_pos_j18: '99999'
+              ,per_pos_active: cur_pos_active_code
             }
-			,success: function(form, action){
+            ,success: function(form, action){
               var json = Ext.util.JSON.decode(action.response.responseText);
-			  msg = json.msg;
+              msg = json.msg;
               Ext.Msg.show({
                 title: 'Success'
                 ,msg: msg
@@ -941,12 +947,12 @@ if (!inputform)
                 ,buttons: Ext.Msg.OK
                 ,modal: true
               });
-			  Ext.getCmp('id_inputform_win').close();
-			  reloadCurrentStore();
-			}
-			,failure: function(form, action){
+              Ext.getCmp('id_inputform_win').close();
+                reloadCurrentStore();
+            }
+            ,failure: function(form, action){
               var json = Ext.util.JSON.decode(action.response.responseText);
-			  msg = json.msg;
+              msg = json.msg;
               Ext.Msg.show({
                 title: 'Warning'
                 ,msg: msg
@@ -954,19 +960,19 @@ if (!inputform)
                 ,buttons: Ext.Msg.OK
                 ,modal: true
               });
-			}
+            }
           });
         }
       },{
         text: 'Cancel'
-		,handler: function(){
-		  //if (inputform_win.hidden == false)
-		    //inputform_win.hide();
-		  inputform_win.close();
-		  if (searchdegree_win.hidden == false)
-		    searchdegree_win.hide();
-		  if (searchpos_win.hidden == false)
-		    searchpos_win.hide();
+        ,handler: function(){
+        //if (inputform_win.hidden == false)
+         //inputform_win.hide();
+          inputform_win.close();
+          if (searchdegree_win.hidden == false)
+            searchdegree_win.hide();
+          if (searchpos_win.hidden == false)
+            searchpos_win.hide();
         }
       }] //eo buttons
     }); //eo new Ext.Window
@@ -1018,8 +1024,8 @@ function showAddForm() {
             ,labelWidth: 75
             ,xtype: 'textfield'
             ,anchor: '90%'
-			,value: cur_piscode
-			,vtype: 'piscode'
+            ,value: cur_piscode
+            //,vtype: 'piscode'
           }]
         },{
           columnWidth: 1
@@ -1029,11 +1035,11 @@ function showAddForm() {
           ,items: [{
             name: 'per_cid'
             ,id: 'id_addform_per_cid'
-			,fieldLabel: 'เลขที่บัตรประชาชน'
+            ,fieldLabel: 'เลขที่บัตรประชาชน'
             ,labelWidth: 75
             ,xtype: 'textfield'
             ,anchor: '90%'
-			,vtype: 'cid'
+            ,vtype: 'cid'
           }]
         },{
           columnWidth: 1
@@ -1138,17 +1144,17 @@ function showAddForm() {
         },{
           columnWidth: .9
           ,layout: 'form'
-	      ,autoHeight: true
+          ,autoHeight: true
           ,border: false
           ,items: [{
             name: 'per_pos_j18'
-			,id: 'id_addform_per_pos_j18'
+            ,id: 'id_addform_per_pos_j18'
             ,xtype: 'textfield'
-			,fieldLabel: 'ตำแหน่งตาม จ.18'
+            ,fieldLabel: 'ตำแหน่งตาม จ.18'
             ,labelWidth: 75
-            ,emptyText: 'ระบุ'
+            ,emptyText: 'ไม่ต้องระบุ'
             ,anchor: '100%'
-			,disabled: true
+            ,disabled: true
           }]
         },{
           columnWidth: .1
@@ -1157,8 +1163,10 @@ function showAddForm() {
             xtype: 'button'
             ,icon: '/man53/icons/find.png'
             ,handler: function(b,e){
-			  cur_pos_level = 'id_addform_per_pos_j18';
-              showSearchPosForm();
+              //cur_pos_level = 'id_addform_per_pos_j18';
+              //showSearchPosForm();
+              Ext.Msg.alert('Info','ยกเลิกรายการนี้แล้ว');
+              return false;
             }
           }]
         },{
@@ -1217,13 +1225,14 @@ function showAddForm() {
               ,per_type: cur_man
               ,per_login: cur_login
               ,per_edu_first: cur_edu_first_code
-		      ,per_edu_top: cur_edu_top_code
-		      ,per_pos_j18: cur_pos_j18_code
-		      ,per_pos_active: cur_pos_active_code
-			}
-			,success: function(form, action){
+              ,per_edu_top: cur_edu_top_code
+              //,per_pos_j18: cur_pos_j18_code
+              ,per_pos_j18: '99999'
+              ,per_pos_active: cur_pos_active_code
+            }
+            ,success: function(form, action){
               var json = Ext.util.JSON.decode(action.response.responseText);
-			  msg = json.msg;
+              msg = json.msg;
               Ext.Msg.show({
                 title: 'Success'
                 ,msg: msg
@@ -1960,15 +1969,17 @@ var m02_grid = new Ext.grid.GridPanel({
 		  ,params: {id: cur_id, ptype: cur_man}
 		  ,success: function(resp, opt){
             var json = Ext.util.JSON.decode(resp.responseText);
-			cur_edu_first_code = json.edu_first_code;
-			cur_edu_first_text = json.edu_first_text;
+            cur_edu_first_code = json.edu_first_code;
+            cur_edu_first_text = json.edu_first_text;
             cur_edu_top_code = json.edu_top_code;
             cur_edu_top_text = json.edu_top_text;
-			cur_pos_j18_code = json.pos_j18_code;
-			cur_pos_j18_text = json.pos_j18_text;
-			cur_pos_active_code = json.pos_active_code;
-			cur_pos_active_text = json.pos_active_text;
-			showInputForm();
+            //cur_pos_j18_code = json.pos_j18_code;
+            //cur_pos_j18_text = json.pos_j18_text;
+            cur_pos_j18_code = '99999'
+            cur_pos_j18_text = 'ไม่ต้องระบุ'
+            cur_pos_active_code = json.pos_active_code;
+            cur_pos_active_text = json.pos_active_text;
+             showInputForm();
           }
 		  ,failure: function(resp,opt){
             Ext.Msg.alert('Error','Cannot retrieve Education and Position data!');
