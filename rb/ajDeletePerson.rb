@@ -25,7 +25,7 @@ elsif (ptype == '8')
   ptype = 'pcuemp'
 end
 
-con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
 sql = "DELETE FROM #{ptype} "
 sql += "WHERE id='#{id}' "
 #log("ajDeletePerson.rb-sql: #{sql}")

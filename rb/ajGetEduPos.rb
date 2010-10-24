@@ -2,7 +2,7 @@
 
 require 'postgres'
 require 'cgi'
-require 'man52_util.rb'
+require 'man53_util.rb'
 
 c = CGI::new
 id = c['id'].to_i
@@ -27,7 +27,7 @@ elsif (ptype == 8)
   tbl = 'pcuemp'
 end
 
-con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
 sql = "SELECT edu_first,edu_top,pos_j18,pos_active "
 sql += "FROM #{tbl} "
 sql += "WHERE id='#{id}' "

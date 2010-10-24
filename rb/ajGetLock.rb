@@ -6,7 +6,7 @@ require 'cgi'
 c = CGI::new
 hcode = c['hcode']
 
-con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
 sql = "SELECT m01,m02,m03,m04,m05,m06,m07,m08 "
 sql += "FROM locks "
 sql += "WHERE hcode='#{hcode}' "

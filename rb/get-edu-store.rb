@@ -9,7 +9,7 @@ start = c['start'].to_s.to_i
 limit = c['limit'].to_s.to_i
 limit = 10 if (limit == 0)
 
-con = PGconn.connect("203.157.240.9",5432,nil,nil,"manpower52","postgres")
+con = PGconn.connect("203.157.240.9",5432,nil,nil,"manpower53","postgres")
 sql = "SELECT id, e_code,e_desc "
 sql += "FROM code_educations "
 sql += "WHERE e_code || e_desc LIKE '%#{kw}%' "

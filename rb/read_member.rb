@@ -9,7 +9,7 @@ limit = c['limit'].to_s.to_i
 limit = 10 if (limit == 0)
 kw = c['kw']
 
-con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
 sql = "SELECT * FROM v_members "
 if (kw > '')
   sql += "WHERE upper(hcode||name||otype||username||password) LIKE '%#{kw.upcase}%' "

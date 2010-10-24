@@ -3,7 +3,7 @@
 require 'postgres'
 
 def getTotalCount()
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53")
   sql = "SELECT count(*) "
   sql += "FROM v_locks "
   res = con.exec(sql)
@@ -12,7 +12,7 @@ def getTotalCount()
 end
 
 def getOkCount()
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53")
   sql = "SELECT count(*) "
   sql += "FROM v_locks "
   sql += "WHERE m01=true AND m02=true AND m03=true AND m04=true "

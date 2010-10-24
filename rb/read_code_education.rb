@@ -9,7 +9,7 @@ limit = c['limit'].to_s.to_i
 limit = 10 if (limit == 0)
 kw = c['kw']
 
-con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
 sql = "SELECT * FROM code_educations "
 if (kw > '')
   sql += "WHERE upper(e_code||e_desc||e_group||e_gcode) LIKE '%#{kw.upcase}%' "

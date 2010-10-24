@@ -2,7 +2,7 @@
 
 require 'postgres'
 require 'cgi'
-require 'man52_util.rb'
+require 'man53_util.rb'
 
 c = CGI::new
 hcode = c['per_hcode']
@@ -72,7 +72,7 @@ else
 
   #updatePiscode(ptype, hcode, piscode)
 
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
   sql = "INSERT INTO #{ptype} (hcode,piscode,otype,cid,sex,fname,lname,"
   sql += "edu_first,edu_top,pos_j18,pos_active,staff,lastupdate) "
   sql += "VALUES ('#{hcode}','#{piscode}','#{otype}','#{cid}','#{sex}','#{fn}','#{ln}',"

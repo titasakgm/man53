@@ -2,7 +2,7 @@
 
 require 'postgres'
 require 'cgi'
-require 'man52_util.rb'
+require 'man53_util.rb'
 
 c = CGI::new
 hcode = c['hcode']
@@ -15,7 +15,7 @@ kw = c['kw'].to_s
 #View v_emp
 #id|pcode|acode|hcode|piscode|otype|cid|sex|fname|lname|edu_first|edu_top|pos_j18|pos_active
 
-con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
 sql = "SELECT * FROM v_emp "
 sql += "WHERE hcode='#{hcode}' "
 if (kw.length > 0)

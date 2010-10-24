@@ -21,7 +21,7 @@ edesc = h['e_desc']
 egroup = h['e_group']
 egcode = h['e_gcode']
 
-con = PGconn.connect("203.157.240.9",5432,nil,nil,"manpower52","postgres")
+con = PGconn.connect("203.157.240.9",5432,nil,nil,"manpower53","postgres")
 sql = "UPDATE code_educations "
 sql += "SET e_code='#{ecode}',e_desc='#{edesc}',"
 sql += "e_group='#{egroup}',e_gcode='#{egcode}' "

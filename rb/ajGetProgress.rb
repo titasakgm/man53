@@ -4,7 +4,7 @@ require 'postgres'
 require 'cgi'
 
 def getProvCount(pcode)
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53")
   sql = "SELECT count(*) "
   sql += "FROM v_locks "
   sql += "WHERE pcode='#{pcode}' "
@@ -14,7 +14,7 @@ def getProvCount(pcode)
 end
 
 def getOkCount(pcode)
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53")
   sql = "SELECT count(*) "
   sql += "FROM v_locks "
   sql += "WHERE pcode='#{pcode}' "
@@ -26,7 +26,7 @@ def getOkCount(pcode)
 end
 
 def getPname(pcode)
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53")
   sql = "SELECT pname "
   sql += "FROM areainfo "
   sql += "WHERE pcode='#{pcode}' "
@@ -40,7 +40,7 @@ start = c['start'].to_i
 limit = c['limit'].to_i
 limit = 15 if (limit == 0)
 
-con = PGconn.connect("localhost",5432,nil,nil,"manpower52")
+con = PGconn.connect("localhost",5432,nil,nil,"manpower53")
 sql = "SELECT khet,pcode,count(*) "
 sql += "FROM v_locks "
 sql += "GROUP BY khet,pcode "

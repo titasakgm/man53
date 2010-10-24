@@ -2,7 +2,7 @@
 
 require 'postgres'
 require 'cgi'
-require 'man52_util.rb'
+require 'man53_util.rb'
 
 c = CGI::new
 id = c['per_id']
@@ -73,7 +73,7 @@ else
 
   updatePiscode(ptype, hcode, piscode)
 
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
   sql = "UPDATE #{ptype} SET hcode='#{hcode}',piscode='#{piscode}',otype='#{otype}',"
   sql += "cid='#{cid}',sex='#{sex}',fname='#{fn}',lname='#{ln}',"
   sql += "edu_first='#{edu1}',edu_top='#{edu2}',pos_j18='#{pos1}',pos_active='#{pos2}',"

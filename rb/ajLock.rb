@@ -2,13 +2,13 @@
 
 require 'postgres'
 require 'cgi'
-require 'man52_util.rb'
+require 'man53_util.rb'
 
 c = CGI::new
 hcode = c['hcode']
 mx = c['mx']
 
-con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
 sql = "UPDATE locks SET #{mx}='T' "
 sql += "WHERE hcode='#{hcode}' "
 log("ajLock-sql1: #{sql}")

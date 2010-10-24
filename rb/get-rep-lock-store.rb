@@ -2,11 +2,11 @@
 
 require 'postgres'
 require 'cgi'
-require '/man52/rb/man52_util.rb'
+require '/man53/rb/man53_util.rb'
 
 def getHcodeFromUser(user)
   hcode = nil
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
   sql = "SELECT hcode FROM members "
   sql += "WHERE username='#{user}' "
 	sql += "ORDER BY hcode "
@@ -30,7 +30,7 @@ end
 
 def getHcodeFromPcode(pcode)
   hcodes = []
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
   sql = "SELECT hcode FROM v_locks "
   sql += "WHERE pcode='#{pcode}' "
 	sql += "ORDER BY hcode "
@@ -46,7 +46,7 @@ end
 def getLock(hcode)
   info = nil
 	hname = getOffice(hcode)
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
   sql = "SELECT id,hcode,m01,m02,m03,m04,m05,m06,m07,m08 FROM v_locks "
   sql += "WHERE hcode='#{hcode}' "
   res = con.exec(sql)

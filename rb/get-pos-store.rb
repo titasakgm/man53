@@ -2,7 +2,7 @@
 
 require 'cgi'
 require 'postgres'
-require 'man52_util.rb'
+require 'man53_util.rb'
 
 c = CGI::new
 kw = c['key']
@@ -30,7 +30,7 @@ start = c['start'].to_s.to_i
 limit = c['limit'].to_s.to_i
 limit = 10 if (limit == 0)
 
-con = PGconn.connect("203.157.240.9",5432,nil,nil,"manpower52","postgres")
+con = PGconn.connect("203.157.240.9",5432,nil,nil,"manpower53","postgres")
 sql = "SELECT pos_code,pos_name "
 sql += "FROM code_position "
 sql += "WHERE pos_code || pos_name LIKE '%#{kw}%' "

@@ -6,7 +6,7 @@ require 'cgi'
 c = CGI::new
 id = c['records'].to_s.tr('"','')
 
-con = PGconn.connect("203.157.240.9",5432,nil,nil,"manpower52","postgres")
+con = PGconn.connect("203.157.240.9",5432,nil,nil,"manpower53","postgres")
 sql = "DELETE FROM members "
 sql += "WHERE id=#{id} "
 res = con.exec(sql)

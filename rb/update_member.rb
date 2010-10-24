@@ -29,7 +29,7 @@ otype = h['otype']
 username = h['username']
 password = h['password']
 
-con = PGconn.connect("203.157.240.9",5432,nil,nil,"manpower52","postgres")
+con = PGconn.connect("203.157.240.9",5432,nil,nil,"manpower53","postgres")
 sql = "UPDATE members "
 sql += "SET hcode='#{hcode}',name='#{name}',otype='#{otype}',"
 sql += "username='#{username}',password='#{password}' "

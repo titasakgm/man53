@@ -2,7 +2,7 @@
 
 require 'postgres'
 
-con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
 sql = "INSERT INTO code_educations (e_code,e_desc,e_group,e_gcode) "
 sql += "VALUES ('[New code]','[New description]','[New group]','[New group code]')"
 res = con.exec(sql)

@@ -36,7 +36,9 @@ def insert(hcode,piscode,otype,cid,sex,fname,lname,edu_first,edu_top,pos_j18,pos
   con.close
 end
 
-#provcode|name|cid|sex|fname|lname|edu_first|edu_top|pos_j18|pos_ative|otype
+#hcode|piscode|provcode|name|cid|sex|fname|lname|edu_first|edu_top|
+#pos_j18|pos_ative|otype
+
 #moffice
 # o_code  | text         |
 # o_pcode | text         |
@@ -50,18 +52,18 @@ src.each do |l|
   n += 1
   print l
   f = l.chomp.split('|')
-  oname = f[1]
-  hcode = getHcode(oname)
-  piscode = getPiscode(hcode) 
-  cid = f[2]
-  sex = f[3]
-  fname = f[4]
-  lname = f[5]
-  edu_first = f[6]
-  edu_top = f[7]
-  pos_j18 = f[8]
-  pos_active = f[9]
-  otype = f[10]
+  hcode = f[0]
+  piscode = f[1] 
+  oname = f[3]
+  cid = f[4]
+  sex = f[5]
+  fname = f[6]
+  lname = f[7]
+  edu_first = f[8]
+  edu_top = f[9]
+  pos_j18 = f[10]
+  pos_active = f[11]
+  otype = f[12]
   next if (hcode.to_i == 0)
   sleep(3) if (n % 10000 == 0)
   insert(hcode,piscode,otype,cid,sex,fname,lname,edu_first,edu_top,pos_j18,pos_active)

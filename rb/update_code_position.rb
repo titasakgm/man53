@@ -21,7 +21,7 @@ poscode = h['pos_code']
 posname = h['pos_name']
 posgroup = h['pos_group']
 
-con = PGconn.connect("203.157.240.9",5432,nil,nil,"manpower52","postgres")
+con = PGconn.connect("203.157.240.9",5432,nil,nil,"manpower53","postgres")
 sql = "UPDATE code_position "
 sql += "SET pos_type='#{postype}',pos_code='#{poscode}',"
 sql += "pos_name='#{posname}',pos_group='#{posgroup}' "

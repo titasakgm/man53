@@ -3,7 +3,7 @@
 require 'postgres'
 
 def log(msg)
-  log = open("/tmp/man52.log","a")
+  log = open("/tmp/man53.log","a")
   log.write(Time.now())
   log.write("\n")
   log.write(msg)
@@ -15,7 +15,7 @@ end
 
 def checkAdmin(pass)
   hcode = nil
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
   sql = "SELECT * FROM admin "
   sql += "WHERE a_password='#{pass}' "
   res = con.exec(sql)
@@ -26,7 +26,7 @@ end
 
 def authen(user,pass)
   hcode = nil
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
   sql = "SELECT hcode FROM members "
   sql += "WHERE username='#{user}' AND password='#{pass}' "
 	sql += "ORDER BY hcode "
@@ -45,7 +45,7 @@ def authen(user,pass)
 end
 
 def getSSJ(user)
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
   sql = "SELECT o_code FROM moffice "
   sql += "WHERE o_pcode='#{user}' AND o_type='1' "
   res = con.exec(sql)
@@ -56,7 +56,7 @@ def getSSJ(user)
 end
 
 def getProvCode(hcode)
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
   sql = "SELECT o_pcode FROM moffice "
   sql += "WHERE o_code='#{hcode}' "
   res = con.exec(sql)
@@ -69,7 +69,7 @@ end
 def getSSO(user)
   pcode = user[0..1]
   acode = user[2..3]
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
   sql = "SELECT o_code FROM moffice "
   sql += "WHERE o_pcode='#{pcode}' AND o_acode = '#{acode}' "
   sql += "AND (o_type='5' OR o_type='6') "
@@ -93,7 +93,7 @@ def getOffice(hcode)
   if (hcode.to_s.length > 5) # Array of hcodes for SSO
     hname = getOffices(hcode)
   else    
-    con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+    con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
     sql = "SELECT o_name FROM moffice "
     sql += "WHERE o_code='#{hcode}' "
     res = con.exec(sql)
@@ -117,7 +117,7 @@ end
 def getLock(hcode)
   lock = nil
   hc = hcode.split('|').first
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
   sql = "SELECT m01,m02,m03,m04,m05,m06,m07,m08 FROM locks "
   sql += "WHERE hcode='#{hc}' "
   log("getLock-sql: #{sql}")
@@ -134,7 +134,7 @@ def checkHC(hcode)
   if (hcode.to_s.length > 5) # Array of hcodes for SSO
     hc_flag = checkHCS(hcode)
   else    
-    con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+    con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
     sql = "SELECT o_type FROM moffice "
     sql += "WHERE o_code='#{hcode}' "
     res = con.exec(sql)
@@ -162,7 +162,7 @@ end
 def getEduName(code)
   desc = 'ระบุ'
   if (code.to_s.length == 5)
-    con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+    con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
     sql = "SELECT e_desc FROM code_education "
     sql += "WHERE e_code='#{code}' "
     res = con.exec(sql)
@@ -178,7 +178,7 @@ end
 def getPosName(code, type)
   desc = 'ระบุ'
   if (code.to_s.length == 5)
-    con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+    con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
     sql = "SELECT pos_name FROM code_position "
     sql += "WHERE pos_code='#{code}' AND pos_type='#{type}' "
     res = con.exec(sql)
@@ -193,7 +193,7 @@ end
 
 def getPiscode(tbl, hcode)
   piscode = 'NA'
-  con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+  con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
   sql = "SELECT piscode FROM #{tbl} "
   sql += "WHERE hcode='#{hcode}' "
   res = con.exec(sql)
@@ -206,7 +206,7 @@ def updatePiscode(tbl, hcode, piscode)
   oldpiscode = getPiscode(tbl, hcode)
   return if (oldpiscode == 'NA')
   if (piscode =~ /\d\d\d\d\d/ && oldpiscode != piscode)
-    con = PGconn.connect("localhost",5432,nil,nil,"manpower52","postgres")
+    con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
 
     sql = "UPDATE pis SET piscode='#{piscode}' WHERE hcode='#{hcode}' " 
     #log("sql-pis: #{sql}")
