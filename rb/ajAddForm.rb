@@ -20,10 +20,11 @@ login = c['per_login']
 ptype = c['per_type']
 
 input_error = ''
+# No validation o piscode for 2553
 # Validate input data
-if (piscode.length != 5 || piscode !~  /\d\d\d\d\d/)
-  input_error = "#{input_error}o กรุณาระบุรหัสกอง จ. ให้ถูกต้อง<br>"
-end
+#if (piscode.length != 5 || piscode !~  /\d\d\d\d\d/)
+#  input_error = "#{input_error}o กรุณาระบุรหัสกอง จ. ให้ถูกต้อง<br>"
+#end
 if (cid.length != 13 || cid !~  /\d{13}/)
   input_error = "#{input_error}o กรุณาระบุเลขที่บัตรประชาชนให้ถูกต้อง<br>"
 end
@@ -42,9 +43,10 @@ end
 if (edu2.length != 5 || edu2 == '00000')
   input_error = "#{input_error}o กรุณาระบุวุฒิฯสูงสุด<br>"
 end
-if (pos1.length != 5 || pos1 == '00000')
-  input_error = "#{input_error}o กรุณาระบุตำแหน่งตาม จ.18<br>"
-end
+# No validation for j18 in 2553
+#if (pos1.length != 5 || pos1 == '00000')
+#  input_error = "#{input_error}o กรุณาระบุตำแหน่งตาม จ.18<br>"
+#end
 if (pos2.length != 5 || pos2 == '00000')
   input_error = "#{input_error}o กรุณาระบุตำแหน่งที่ปฏิบัติงานจริง<br>"
 end
