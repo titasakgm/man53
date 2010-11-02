@@ -141,7 +141,8 @@ def checkHC(hcode)
     con.close
     res.each do |rec|
       otype = rec[0]
-      if (otype.to_i == 6)
+      # Change ssj sso to input 4 types like hc
+      if (otype.to_i == 6 || otype.to_i == 1 || otype.to_i == 5)
         hc_flag = 't'
       end
     end
