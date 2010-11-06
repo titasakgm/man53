@@ -45,7 +45,7 @@ var loginForm = {
   },{
     text: 'Download คู่มือการใช้งาน'
     ,handler: function() {
-		window.location.href = 'ftp://203.157.240.9/pub/manpower52/manpower52.rar';
+		window.location.href = 'ftp://203.157.240.9/pub/manpower53/manpower53.doc';
     }
   }]
   ,buttonAlign: 'center'
