@@ -146,16 +146,16 @@ var m01_store = new Ext.data.Store({
       'id'
       ,'hcode'
       ,'piscode'
-	  ,'otype'
-	  ,'office'
+      ,'otype'
+      ,'office'
       ,'cid'
       ,'sex'
-	  ,'fname'
+      ,'fname'
       ,'lname'
       ,'edu_first'
-	  ,'edu_top'
-	  ,'pos_j18'
-	  ,'pos_active'
+      ,'edu_top'
+      ,'pos_j18'
+      ,'pos_active'
     ]
   }) 
 });
@@ -174,16 +174,16 @@ var m02_store = new Ext.data.Store({
       'id'
       ,'hcode'
       ,'piscode'
-	  ,'otype'
-	  ,'office'
+      ,'otype'
+      ,'office'
       ,'cid'
       ,'sex'
-	  ,'fname'
+      ,'fname'
       ,'lname'
       ,'edu_first'
-	  ,'edu_top'
-	  ,'pos_j18'
-	  ,'pos_active'
+      ,'edu_top'
+      ,'pos_j18'
+      ,'pos_active'
     ]
   }) 
 });
@@ -202,16 +202,16 @@ var m03_store = new Ext.data.Store({
       'id'
       ,'hcode'
       ,'piscode'
-	  ,'otype'
-	  ,'office'
+      ,'otype'
+      ,'office'
       ,'cid'
       ,'sex'
-	  ,'fname'
+      ,'fname'
       ,'lname'
       ,'edu_first'
-	  ,'edu_top'
-	  ,'pos_j18'
-	  ,'pos_active'
+      ,'edu_top'
+      ,'pos_j18'
+      ,'pos_active'
     ]
   }) 
 });
@@ -230,16 +230,16 @@ var m04_store = new Ext.data.Store({
       'id'
       ,'hcode'
       ,'piscode'
-	  ,'otype'
-	  ,'office'
+      ,'otype'
+      ,'office'
       ,'cid'
       ,'sex'
-	  ,'fname'
+      ,'fname'
       ,'lname'
       ,'edu_first'
-	  ,'edu_top'
-	  ,'pos_j18'
-	  ,'pos_active'
+      ,'edu_top'
+      ,'pos_j18'
+      ,'pos_active'
     ]
   }) 
 });
@@ -258,16 +258,16 @@ var m05_store = new Ext.data.Store({
       'id'
       ,'hcode'
       ,'piscode'
-	  ,'otype'
-	  ,'office'
+      ,'otype'
+      ,'office'
       ,'cid'
       ,'sex'
-	  ,'fname'
+      ,'fname'
       ,'lname'
       ,'edu_first'
-	  ,'edu_top'
-	  ,'pos_j18'
-	  ,'pos_active'
+      ,'edu_top'
+      ,'pos_j18'
+      ,'pos_active'
     ]
   }) 
 });
@@ -286,16 +286,16 @@ var m06_store = new Ext.data.Store({
       'id'
       ,'hcode'
       ,'piscode'
-	  ,'otype'
-	  ,'office'
+      ,'otype'
+      ,'office'
       ,'cid'
       ,'sex'
-	  ,'fname'
+      ,'fname'
       ,'lname'
       ,'edu_first'
-	  ,'edu_top'
-	  ,'pos_j18'
-	  ,'pos_active'
+      ,'edu_top'
+      ,'pos_j18'
+      ,'pos_active'
     ]
   }) 
 });
@@ -314,16 +314,16 @@ var m07_store = new Ext.data.Store({
       'id'
       ,'hcode'
       ,'piscode'
-	  ,'otype'
-	  ,'office'
+      ,'otype'
+      ,'office'
       ,'cid'
       ,'sex'
-	  ,'fname'
+      ,'fname'
       ,'lname'
       ,'edu_first'
-	  ,'edu_top'
-	  ,'pos_j18'
-	  ,'pos_active'
+      ,'edu_top'
+      ,'pos_j18'
+      ,'pos_active'
     ]
   }) 
 });
@@ -342,16 +342,16 @@ var m08_store = new Ext.data.Store({
       'id'
       ,'hcode'
       ,'piscode'
-	  ,'otype'
-	  ,'office'
+      ,'otype'
+      ,'office'
       ,'cid'
       ,'sex'
-	  ,'fname'
+      ,'fname'
       ,'lname'
       ,'edu_first'
-	  ,'edu_top'
-	  ,'pos_j18'
-	  ,'pos_active'
+      ,'edu_top'
+      ,'pos_j18'
+      ,'pos_active'
     ]
   }) 
 });
@@ -387,15 +387,15 @@ var smEdu = new Ext.grid.RowSelectionModel({
       fn: function(sm,index,record){
         cur_ecode = record.data.e_code;
         cur_edesc = record.data.e_desc;
-		Ext.getCmp(cur_edu_level).setValue(cur_edesc);
-		Ext.getCmp('id_searchdegree_win').hide();
+        Ext.getCmp(cur_edu_level).setValue(cur_edesc);
+        Ext.getCmp('id_searchdegree_win').hide();
         if (cur_edu_level == 'id_addform_per_edu_first' || cur_edu_level == 'id_inputform_per_edu_first' )
-		{
+        {
           cur_edu_first_code = cur_ecode;
           cur_edu_first_text = cur_edesc;
         }
         else
-		{
+        {
           cur_edu_top_code = cur_ecode;
           cur_edu_top_text = cur_edesc;
         }
@@ -472,12 +472,12 @@ function showSearchDegreeForm() {
   if (!searchdegree_win)
   {
     kw = '%';
-	searchdegree_win = new Ext.Window({
+    searchdegree_win = new Ext.Window({
       width: 400
       ,id: 'id_searchdegree_win'
       ,autoHeight: true
       ,x: 715
-	  ,y: 85
+      ,y: 85
       ,title:  'ค้นหารหัสวุฒิการศึกษา'
       ,items: [ edu_grid ]
       ,closable: false
@@ -763,17 +763,17 @@ if (!inputform)
         },{
           columnWidth: .9
           ,layout: 'form'
-	      ,autoHeight: true
+          ,autoHeight: true
           ,border: false
           ,items: [{
             name: 'per_edu_first'
-			,id: 'id_inputform_per_edu_first'
+            ,id: 'id_inputform_per_edu_first'
             ,xtype: 'textfield'
             ,fieldLabel: 'วุฒิฯที่บรรจุ'
             ,labelWidth: 75
             ,emptyText: 'ระบุ'
             ,anchor: '100%'
-			,disabled: true
+            ,disabled: true
             ,value: cur_edu_first_text
           }]
         },{
@@ -782,8 +782,9 @@ if (!inputform)
           ,items: [{
             xtype: 'button'
             ,icon: '/man53/icons/find.png'
+            ,disabled: true
             ,handler: function(b,e){
-			  cur_edu_level = 'id_inputform_per_edu_first';
+              cur_edu_level = 'id_inputform_per_edu_first';
               showSearchDegreeForm();
             }
           }]
@@ -794,13 +795,13 @@ if (!inputform)
           ,border: false
           ,items: [{
             name: 'per_edu_top'
-			,id: 'id_inputform_per_edu_top'
+            ,id: 'id_inputform_per_edu_top'
             ,xtype: 'textfield'
-			,fieldLabel: 'วุฒิฯสูงสุด'
+            ,fieldLabel: 'วุฒิฯสูงสุด'
             ,labelWidth: 75
             ,emptyText: 'ระบุ'
             ,anchor: '100%'
-			,disabled: true
+            ,disabled: false
             ,value: cur_edu_top_text
           }]
         },{
@@ -810,14 +811,14 @@ if (!inputform)
             xtype: 'button'
             ,icon: '/man53/icons/find.png'
             ,handler: function(b,e){
-			  cur_edu_level = 'id_inputform_per_edu_top';
+              cur_edu_level = 'id_inputform_per_edu_top';
               showSearchDegreeForm();
             }
           }]
         },{
           columnWidth: .9
           ,layout: 'form'
-	      ,autoHeight: true
+	  ,autoHeight: true
           ,border: false
           ,items: [{
             name: 'per_pos_j18'
@@ -1096,13 +1097,13 @@ function showAddForm() {
           ,border: false
           ,items: [{
             name: 'per_edu_first'
-			,id: 'id_addform_per_edu_first'
+            ,id: 'id_addform_per_edu_first'
             ,xtype: 'textfield'
             ,fieldLabel: 'วุฒิฯที่บรรจุ'
             ,labelWidth: 75
             ,emptyText: 'ระบุ'
             ,anchor: '100%'
-			,disabled: true
+            ,disabled: true
           }]
         },{
           columnWidth: .1
@@ -1110,8 +1111,9 @@ function showAddForm() {
           ,items: [{
             xtype: 'button'
             ,icon: '/man53/icons/find.png'
+            ,disabled: true
             ,handler: function(b,e){
-			  cur_edu_level = 'id_addform_per_edu_first';
+              cur_edu_level = 'id_addform_per_edu_first';
               showSearchDegreeForm();
             }
           }]
@@ -1122,13 +1124,13 @@ function showAddForm() {
           ,border: false
           ,items: [{
             name: 'per_edu_top'
-			,id: 'id_addform_per_edu_top'
+            ,id: 'id_addform_per_edu_top'
             ,xtype: 'textfield'
-			,fieldLabel: 'วุฒิฯสูงสุด'
+            ,fieldLabel: 'วุฒิฯสูงสุด'
             ,labelWidth: 75
             ,emptyText: 'ระบุ'
             ,anchor: '100%'
-			,disabled: true
+            ,disabled: false
           }]
         },{
           columnWidth: .1
@@ -1137,7 +1139,7 @@ function showAddForm() {
             xtype: 'button'
             ,icon: '/man53/icons/find.png'
             ,handler: function(b,e){
-			  cur_edu_level = 'id_addform_per_edu_top';
+              cur_edu_level = 'id_addform_per_edu_top';
               showSearchDegreeForm();
             }
           }]
@@ -2265,26 +2267,26 @@ var m03_grid = new Ext.grid.GridPanel({
       if (columnIndex == 8)
       {
         var con = new Ext.data.Connection();
-		con.request({
+        con.request({
           url: 'rb/ajGetEduPos.rb'
-		  ,params: {id: cur_id, ptype: cur_man}
-		  ,success: function(resp, opt){
+          ,params: {id: cur_id, ptype: cur_man}
+          ,success: function(resp, opt){
             var json = Ext.util.JSON.decode(resp.responseText);
-			cur_edu_first_code = json.edu_first_code;
-			cur_edu_first_text = json.edu_first_text;
+            cur_edu_first_code = json.edu_first_code;
+            cur_edu_first_text = json.edu_first_text;
             cur_edu_top_code = json.edu_top_code;
             cur_edu_top_text = json.edu_top_text;
-			cur_pos_j18_code = json.pos_j18_code;
-			cur_pos_j18_text = json.pos_j18_text;
-			cur_pos_active_code = json.pos_active_code;
-			cur_pos_active_text = json.pos_active_text;
-			showInputForm();
+            cur_pos_j18_code = json.pos_j18_code;
+            cur_pos_j18_text = json.pos_j18_text;
+            cur_pos_active_code = json.pos_active_code;
+            cur_pos_active_text = json.pos_active_text;
+            showInputForm();
           }
-		  ,failure: function(resp,opt){
+          ,failure: function(resp,opt){
             Ext.Msg.alert('Error','Cannot retrieve Education and Position data!');
 			return false;
           }
-		});
+        });
       }
     } //eo cellclick
   } //eo listeners
@@ -2891,26 +2893,26 @@ var m05_grid = new Ext.grid.GridPanel({
       if (columnIndex == 8)
       {
         var con = new Ext.data.Connection();
-		con.request({
+	con.request({
           url: 'rb/ajGetEduPos.rb'
-		  ,params: {id: cur_id, ptype: cur_man}
-		  ,success: function(resp, opt){
+          ,params: {id: cur_id, ptype: cur_man}
+          ,success: function(resp, opt){
             var json = Ext.util.JSON.decode(resp.responseText);
-			cur_edu_first_code = json.edu_first_code;
-			cur_edu_first_text = json.edu_first_text;
+            cur_edu_first_code = json.edu_first_code;
+            cur_edu_first_text = json.edu_first_text;
             cur_edu_top_code = json.edu_top_code;
             cur_edu_top_text = json.edu_top_text;
-			cur_pos_j18_code = json.pos_j18_code;
-			cur_pos_j18_text = json.pos_j18_text;
-			cur_pos_active_code = json.pos_active_code;
-			cur_pos_active_text = json.pos_active_text;
-			showInputForm();
+            cur_pos_j18_code = json.pos_j18_code;
+            cur_pos_j18_text = json.pos_j18_text;
+            cur_pos_active_code = json.pos_active_code;
+            cur_pos_active_text = json.pos_active_text;
+            showInputForm();
           }
-		  ,failure: function(resp,opt){
+          ,failure: function(resp,opt){
             Ext.Msg.alert('Server Response','Cannot retrieve Education and Position data!');
 			return false;
           }
-		});
+        });
       }
     } //eo cellclick
   } //eo listeners
@@ -3189,26 +3191,26 @@ var m06_grid = new Ext.grid.GridPanel({
       if (columnIndex == 8)
       {
         var con = new Ext.data.Connection();
-		con.request({
+        con.request({
           url: 'rb/ajGetEduPos.rb'
-		  ,params: {id: cur_id, ptype: cur_man}
-		  ,success: function(resp, opt){
+          ,params: {id: cur_id, ptype: cur_man}
+          ,success: function(resp, opt){
             var json = Ext.util.JSON.decode(resp.responseText);
-			cur_edu_first_code = json.edu_first_code;
-			cur_edu_first_text = json.edu_first_text;
+            cur_edu_first_code = json.edu_first_code;
+            cur_edu_first_text = json.edu_first_text;
             cur_edu_top_code = json.edu_top_code;
             cur_edu_top_text = json.edu_top_text;
-			cur_pos_j18_code = json.pos_j18_code;
-			cur_pos_j18_text = json.pos_j18_text;
-			cur_pos_active_code = json.pos_active_code;
-			cur_pos_active_text = json.pos_active_text;
-			showInputForm();
+            cur_pos_j18_code = json.pos_j18_code;
+            cur_pos_j18_text = json.pos_j18_text;
+            cur_pos_active_code = json.pos_active_code;
+            cur_pos_active_text = json.pos_active_text;
+            showInputForm();
           }
-		  ,failure: function(resp,opt){
+          ,failure: function(resp,opt){
             Ext.Msg.alert('Server Response','Cannot retrieve Education and Position data!');
 			return false;
           }
-		});
+        });
       }
     } //eo cellclick
   } //eo listeners

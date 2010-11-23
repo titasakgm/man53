@@ -24,8 +24,8 @@ input_error = ''
 # No validation of piscode from 253
 # Validate input data
 #if (piscode.length != 5 || piscode !~  /\d\d\d\d\d/)
-3  input_error = "#{input_error}o กรุณาระบุรหัสกอง จ. ให้ถูกต้อง<br>"
-end
+#  input_error = "#{input_error}o กรุณาระบุรหัสกอง จ. ให้ถูกต้อง<br>"
+#end
 if (cid.length != 13 || cid !~  /\d{13}/)
   input_error = "#{input_error}o กรุณาระบุเลขที่บัตรประชาชนให้ถูกต้อง<br>"
 end
