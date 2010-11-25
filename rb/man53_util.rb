@@ -162,7 +162,8 @@ end
 
 def getEduName(code)
   desc = 'ระบุ'
-  if (code.to_s.length == 5)
+  if (code.to_s.length > 0)
+    code = sprintf("%05d", code.to_s.to_i)
     con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
     sql = "SELECT e_desc FROM code_education "
     sql += "WHERE e_code='#{code}' "

@@ -773,7 +773,7 @@ if (!inputform)
             ,labelWidth: 75
             ,emptyText: 'ระบุ'
             ,anchor: '100%'
-            ,disabled: true
+            ,disabled: false
             ,value: cur_edu_first_text
           }]
         },{
@@ -782,7 +782,6 @@ if (!inputform)
           ,items: [{
             xtype: 'button'
             ,icon: '/man53/icons/find.png'
-            ,disabled: true
             ,handler: function(b,e){
               cur_edu_level = 'id_inputform_per_edu_first';
               showSearchDegreeForm();
@@ -868,7 +867,7 @@ if (!inputform)
             xtype: 'button'
             ,icon: '/man53/icons/find.png'
             ,handler: function(b,e){
-			  cur_pos_level = 'id_inputform_per_pos_active';
+              cur_pos_level = 'id_inputform_per_pos_active';
               showSearchPosForm();
             }
           }]
@@ -883,8 +882,8 @@ if (!inputform)
   //Ext.getCmp('id_inputform_per_fname').setValue(cur_fname);
   //Ext.getCmp('id_inputform_per_lname').setValue(cur_lname);
   //Ext.getCmp('id_inputform_per_sex').setValue(cur_sex);
-  //Ext.getCmp('id_inputform_per_edu_first').setValue(cur_edu_first_text);
-  //Ext.getCmp('id_inputform_per_edu_top').setValue(cur_edu_top_text);
+  Ext.getCmp('id_inputform_per_edu_first').setValue(cur_edu_first_text);
+  Ext.getCmp('id_inputform_per_edu_top').setValue(cur_edu_top_text);
   //Ext.getCmp('id_inputform_per_pos_j18').setValue(cur_pos_j18_text);
   //Ext.getCmp('id_inputform_per_pos_active').setValue(cur_pos_active_text);
  
@@ -1103,7 +1102,7 @@ function showAddForm() {
             ,labelWidth: 75
             ,emptyText: 'ระบุ'
             ,anchor: '100%'
-            ,disabled: true
+            ,disabled: false
           }]
         },{
           columnWidth: .1
@@ -1111,7 +1110,6 @@ function showAddForm() {
           ,items: [{
             xtype: 'button'
             ,icon: '/man53/icons/find.png'
-            ,disabled: true
             ,handler: function(b,e){
               cur_edu_level = 'id_addform_per_edu_first';
               showSearchDegreeForm();
@@ -1193,7 +1191,7 @@ function showAddForm() {
             xtype: 'button'
             ,icon: '/man53/icons/find.png'
             ,handler: function(b,e){
-			  cur_pos_level = 'id_addform_per_pos_active';
+              cur_pos_level = 'id_addform_per_pos_active';
               showSearchPosForm();
             }
           }]
