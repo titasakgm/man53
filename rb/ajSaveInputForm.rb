@@ -38,10 +38,10 @@ end
 if (sex == '0' || sex.nil?)
   input_error = "#{input_error}o กรุณาระบุเพศ<br>"
 end
-if (edu1.length != 5 || edu1 == '00000')
+if (edu1.length == 0 || edu1 == '00000')
   input_error = "#{input_error}o กรุณาระบุวุฒิฯที่บรรจุ<br>"
 end
-if (edu2.length != 5 || edu2 == '00000')
+if (edu2.length == 0 || edu2 == '00000')
   input_error = "#{input_error}o กรุณาระบุวุฒิฯสูงสุด<br>"
 end
 # No validation of j18 for 2553
