@@ -81,7 +81,7 @@ else
   sql += "edu_first='#{edu1}',edu_top='#{edu2}',pos_j18='#{pos1}',pos_active='#{pos2}',"
   sql += "staff='#{login}',lastupdate='#{Time.now}' "
   sql += "WHERE id='#{id}' "
-  #log("sql: #{sql}")
+  log("sql: #{sql}")
   res = con.exec(sql)
   con.close
 

@@ -921,6 +921,7 @@ if (!inputform)
 		,id: 'id_save_inputform_btn'
 		,disabled: save_flag
         ,handler: function() {
+          debugger;
 	  //cur_pos_j18 = Ext.getCmp('id_inputform_per_pos_j18').getValue();
 	  cur_pos_j18 = '99999';
 	  cur_pos_active = Ext.getCmp('id_inputform_per_pos_active').getValue();
