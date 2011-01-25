@@ -2,6 +2,7 @@
 
 require 'postgres'
 require 'cgi'
+require 'man53_util.rb'
 
 c = CGI::new
 id = c['id']
