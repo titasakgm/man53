@@ -21,8 +21,8 @@ login = c['per_login']
 ptype = c['per_type']
 
 # format edu1 edu2 to 5 digit
-edu1 = sprintf("%0.5d", edu1.to_s.to_i)
-edu2 = sprintf("%0.5d", edu2.to_s.to_i)
+edu1 = sprintf("%05d", edu1.to_s.to_i)
+edu2 = sprintf("%05d", edu2.to_s.to_i)
 
 input_error = ''
 # No validation of piscode from 253
