@@ -165,9 +165,10 @@ def getEduName(code)
   if (code.to_s.length > 0)
     code = sprintf("%05d", code.to_s.to_i)
     con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
-    sql = "SELECT e_desc FROM code_education "
+    sql = "SELECT e_desc FROM code_educations "
     sql += "WHERE e_code='#{code}' "
     res = con.exec(sql)
+    #log("getEduName-sql: #{sql}")
     con.close
     found = res.num_tuples
     if (found == 1)

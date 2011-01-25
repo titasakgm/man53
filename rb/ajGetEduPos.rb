@@ -41,6 +41,7 @@ res.each do |rec|
   edu1t = getEduName(edu1c)
   edu2c = rec[1]
   edu2t = getEduName(edu2c)
+  log("edu2c: #{edu2c} edu2t: #{edu2t}")
   pos1c = rec[2]
   pos1t = getPosName(pos1c, tbl)
   pos2c = rec[3]
@@ -49,6 +50,8 @@ end
 
 data = "{'edu_first_code':'#{edu1c}','edu_first_text':'#{edu1t}','edu_top_code':'#{edu2c}','edu_top_text':'#{edu2t}',"
 data += "'pos_j18_code':'#{pos1c}','pos_j18_text':'#{pos1t}','pos_active_code':'#{pos2c}','pos_active_text':'#{pos2t}'}"
+
+log("data: #{data}")
 
 print <<EOF
 Content-type: text/html
