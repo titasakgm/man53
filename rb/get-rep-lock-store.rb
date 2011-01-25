@@ -9,21 +9,21 @@ def getHcodeFromUser(user)
   con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
   sql = "SELECT hcode FROM members "
   sql += "WHERE username='#{user}' "
-	sql += "ORDER BY hcode "
+  sql += "ORDER BY hcode "
   res = con.exec(sql)
   con.close
 
-	found = res.num_tuples
+  found = res.num_tuples
   if (found == 0)
     hcode = 'NA'
   elsif (found == 1)
     hcode = res[0][0]
   elsif (found > 1) # sa1401 สสอ
-	  if (res[0][0].to_i < 77) # สสจ.
-		  hcode = res[0][0]
-		else
+    if (res[0][0].to_i < 77) # สสจ.
+      hcode = res[0][0]
+    else
       hcode = res.collect.join('|')
-		end
+    end
   end
   hcode
 end
@@ -33,19 +33,19 @@ def getHcodeFromPcode(pcode)
   con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
   sql = "SELECT hcode FROM v_locks "
   sql += "WHERE pcode='#{pcode}' "
-	sql += "ORDER BY hcode "
+  sql += "ORDER BY hcode "
   res = con.exec(sql)
   con.close
   res.each do |rec|
     hcode = rec[0]
-		hcodes.push(hcode)
+    hcodes.push(hcode)
   end
   hcodes
 end
 
 def getLock(hcode)
   info = nil
-	hname = getOffice(hcode)
+  hname = getOffice(hcode)
   con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
   sql = "SELECT id,hcode,m01,m02,m03,m04,m05,m06,m07,m08 FROM v_locks "
   sql += "WHERE hcode='#{hcode}' "
@@ -58,7 +58,7 @@ def getLock(hcode)
   else
     res.each do |rec|
       id = rec[0]
-			hcode = rec[1]
+      hcode = rec[1]
       m01 = rec[2]
       m02 = rec[3]
       m03 = rec[4]
@@ -85,14 +85,14 @@ hcs = hcode.split('|')
 complete = 0
 if (hcs.size == 1 && hcs[0].to_i < 76) # SSJ
   pcode = getProvCode(hcs[0])
-	hcs = getHcodeFromPcode(pcode)
+  hcs = getHcodeFromPcode(pcode)
 end
 
 (0..hcs.size-1).each do |i|
   lock = getLock(hcs[i])
-	if (lock.count('t') == 8)
-	  complete += 1
-	end
+  if (lock.count('t') == 8)
+    complete += 1
+  end
   a.push(lock)
 end
 

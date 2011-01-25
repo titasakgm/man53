@@ -28,7 +28,7 @@ end
 con = PGconn.connect("localhost",5432,nil,nil,"manpower53","postgres")
 sql = "DELETE FROM #{ptype} "
 sql += "WHERE id='#{id}' "
-#log("ajDeletePerson.rb-sql: #{sql}")
+log("ajDeletePerson.rb-sql: #{sql}")
 res = con.exec(sql)
 con.close
 
